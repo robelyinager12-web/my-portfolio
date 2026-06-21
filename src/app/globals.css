@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light theme — RGB triplets so Tailwind's opacity modifiers work */
+  --color-paper: 248 248 244;     /* #F8F8F4 */
+  --color-paper-2: 240 240 232;    /* #F0F0E8 */
+  --color-paper-3: 255 255 255;     /* #FFFFFF */
+  --color-ink: 21 23 27;             /* #15171B */
+  --color-ink-2: 75 79 88;            /* #4B4F58 */
+  --color-ink-3: 136 139 146;          /* #888B92 */
+  --color-line: 21 23 27;               /* used with low opacity */
+  --color-line-strong: 21 23 27;
+  --color-indigo: 67 57 202;             /* #4339CA */
+  --color-indigo-deep: 46 39 144;         /* #2E2790 */
+  --color-violet: 124 58 237;              /* #7C3AED */
+  --color-cyan: 14 165 183;                 /* #0EA5B7 */
+  --color-cyan-deep: 11 111 122;             /* #0B6F7A */
+}
+
+.dark {
+  /* Dark theme — matches the cyberpunk-leaning palette: deep navy + neon accents */
+  --color-paper: 5 8 22;          /* #050816 */
+  --color-paper-2: 11 17 32;       /* #0B1120 */
+  --color-paper-3: 15 20 38;        /* slightly lifted card surface */
+  --color-ink: 237 240 247;          /* near-white text */
+  --color-ink-2: 168 174 196;
+  --color-ink-3: 116 122 145;
+  --color-line: 255 255 255;          /* used with low opacity */
+  --color-line-strong: 255 255 255;
+  --color-indigo: 139 92 246;          /* #8B5CF6 */
+  --color-indigo-deep: 167 139 250;
+  --color-violet: 236 72 153;            /* #EC4899 */
+  --color-cyan: 0 255 255;                /* #00FFFF */
+  --color-cyan-deep: 34 211 238;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(var(--color-paper));
+  color: rgb(var(--color-ink));
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+section[id] {
+  scroll-margin-top: 90px;
+}
+
+::selection {
+  background: rgb(var(--color-indigo));
+  color: rgb(var(--color-paper));
+}
+
+/* Border opacity needs different intensity than text, so these utility
+   classes get an explicit modifier rather than relying on the raw token. */
+.border-line {
+  border-color: rgb(var(--color-line) / 0.12);
+}
+.border-line-strong {
+  border-color: rgb(var(--color-line-strong) / 0.22);
+}
+.before\:border-line::before {
+  border-color: rgb(var(--color-line) / 0.12);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .has-custom-cursor {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
