@@ -1,4 +1,3 @@
-cat > src/components/layout/Navbar.tsx << 'ENDOFFILE'
 'use client';
 
 import { useState } from 'react';
@@ -89,4 +88,3 @@ export function Navbar() {
     </header>
   );
 }
-ENDOFFILE
