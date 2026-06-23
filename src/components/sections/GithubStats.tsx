@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { Star, GitFork, BookOpen, Users } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';

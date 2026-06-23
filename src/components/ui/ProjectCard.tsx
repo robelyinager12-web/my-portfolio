@@ -1,3 +1,5 @@
+'use client';
+
 import { Project } from '@/types';
 
 export function ProjectCard({ project }: { project: Project }) {
