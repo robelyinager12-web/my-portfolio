@@ -1,3 +1,4 @@
+cat > src/components/layout/Navbar.tsx << 'ENDOFFILE'
 'use client';
 
 import { useState } from 'react';
@@ -47,7 +48,7 @@ export function Navbar() {
             href="#contact"
             className="inline-flex rounded-md border border-line-strong px-[18px] py-[9px] font-mono text-[13px] transition-all hover:bg-ink hover:text-paper"
           >
-            say hello →
+            say hello
           </a>
         </div>
 
@@ -81,10 +82,11 @@ export function Navbar() {
             onClick={() => setOpen(false)}
             className="mt-2 inline-flex w-fit rounded-md border border-line-strong px-5 py-2.5 font-mono text-sm"
           >
-            say hello →
+            say hello
           </a>
         </nav>
       )}
     </header>
   );
 }
+ENDOFFILE
