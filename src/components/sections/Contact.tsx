@@ -60,7 +60,6 @@ export function Contact() {
               Next.js, Node.js and interactive 3D work. The fastest way to
               reach me is email.
             </p>
-
             <div className="flex flex-col gap-5">
               {socialLinks.map((link) => (
                 
@@ -112,7 +111,6 @@ export function Contact() {
                   />
                 </div>
               </div>
-
               <div>
                 <label htmlFor="subject" className="mb-[7px] block font-mono text-xs text-ink-3">
                   subject *
@@ -126,7 +124,6 @@ export function Contact() {
                   className={inputClass}
                 />
               </div>
-
               <div>
                 <label htmlFor="message" className="mb-[7px] block font-mono text-xs text-ink-3">
                   message *
@@ -139,7 +136,6 @@ export function Contact() {
                   className={`${inputClass} min-h-[140px] resize-y`}
                 />
               </div>
-
               <button
                 type="submit"
                 disabled={status === 'sending'}
@@ -148,7 +144,6 @@ export function Contact() {
                 <Send size={15} />
                 {status === 'sending' ? 'Sending…' : 'Send message'}
               </button>
-
               {status === 'success' && (
                 <p className="font-mono text-xs text-[#1F8A4C]">
                   Message sent — I&apos;ll reply to you at {site.email} soon.

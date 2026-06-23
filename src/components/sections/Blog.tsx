@@ -35,15 +35,12 @@ export function Blog() {
                   <span>·</span>
                   <span>{post.readMinutes} min read</span>
                 </div>
-
                 <h3 className="mt-3 font-display text-lg font-semibold leading-snug text-ink transition-colors group-hover:text-indigo-deep">
                   {post.title}
                 </h3>
-
                 <p className="mt-2.5 text-[14.5px] leading-relaxed text-ink-2">
                   {post.excerpt}
                 </p>
-
                 <div className="mt-auto pt-5">
                   <span className="font-mono text-[12.5px] text-indigo-deep">
                     Read article →
