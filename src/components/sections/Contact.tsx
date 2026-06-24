@@ -20,7 +20,6 @@ export function Contact() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus('sending');
-
     const form = e.currentTarget;
     const data = {
       name: (form.elements.namedItem('name') as HTMLInputElement).value,
@@ -28,7 +27,6 @@ export function Contact() {
       subject: (form.elements.namedItem('subject') as HTMLInputElement).value,
       message: (form.elements.namedItem('message') as HTMLTextAreaElement).value
     };
-
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -51,14 +49,10 @@ export function Contact() {
       <div className="mx-auto max-w-[1180px] px-8">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
-            <SectionHeading
-              eyebrow="~/contact"
-              title="Let's build something."
-            />
+            <SectionHeading eyebrow="~/contact" title="Lets build something." />
             <p className="mb-8 max-w-[400px] text-[16.5px] leading-relaxed text-ink-2">
               Open to full-stack roles and freelance projects involving React,
-              Next.js, Node.js and interactive 3D work. The fastest way to
-              reach me is email.
+              Next.js, Node.js and interactive 3D work.
             </p>
             <div className="flex flex-col gap-5">
               {socialLinks.map((link) => (
@@ -80,61 +74,25 @@ export function Contact() {
               ))}
             </div>
           </Reveal>
-
           <Reveal delay={0.1}>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div className="flex flex-col gap-4 sm:flex-row">
                 <div className="flex-1">
-                  <label htmlFor="name" className="mb-[7px] block font-mono text-xs text-ink-3">
-                    name *
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    placeholder="Jane Doe"
-                    className={inputClass}
-                  />
+                  <label htmlFor="name" className="mb-[7px] block font-mono text-xs text-ink-3">name</label>
+                  <input id="name" name="name" type="text" required placeholder="Jane Doe" className={inputClass} />
                 </div>
                 <div className="flex-1">
-                  <label htmlFor="email" className="mb-[7px] block font-mono text-xs text-ink-3">
-                    email *
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="jane@company.com"
-                    className={inputClass}
-                  />
+                  <label htmlFor="email" className="mb-[7px] block font-mono text-xs text-ink-3">email</label>
+                  <input id="email" name="email" type="email" required placeholder="jane@company.com" className={inputClass} />
                 </div>
               </div>
               <div>
-                <label htmlFor="subject" className="mb-[7px] block font-mono text-xs text-ink-3">
-                  subject *
-                </label>
-                <input
-                  id="subject"
-                  name="subject"
-                  type="text"
-                  required
-                  placeholder="Project enquiry / job opportunity / just saying hi"
-                  className={inputClass}
-                />
+                <label htmlFor="subject" className="mb-[7px] block font-mono text-xs text-ink-3">subject</label>
+                <input id="subject" name="subject" type="text" required placeholder="Project enquiry or job opportunity" className={inputClass} />
               </div>
               <div>
-                <label htmlFor="message" className="mb-[7px] block font-mono text-xs text-ink-3">
-                  message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  placeholder="Tell me about the project, role, or idea..."
-                  className={`${inputClass} min-h-[140px] resize-y`}
-                />
+                <label htmlFor="message" className="mb-[7px] block font-mono text-xs text-ink-3">message</label>
+                <textarea id="message" name="message" required placeholder="Tell me about the project or role..." className={`${inputClass} min-h-[140px] resize-y`} />
               </div>
               <button
                 type="submit"
@@ -142,21 +100,13 @@ export function Contact() {
                 className="mt-1.5 inline-flex w-fit items-center gap-2 rounded-[7px] bg-ink px-6 py-3 font-mono text-sm text-paper transition-all hover:bg-indigo-deep hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <Send size={15} />
-                {status === 'sending' ? 'Sending…' : 'Send message'}
+                {status === 'sending' ? 'Sending' : 'Send message'}
               </button>
               {status === 'success' && (
-                <p className="font-mono text-xs text-[#1F8A4C]">
-                  Message sent — I&apos;ll reply to you at {site.email} soon.
-                </p>
+                <p className="font-mono text-xs text-[#1F8A4C]">Message sent successfully.</p>
               )}
               {status === 'error' && (
-                <p className="font-mono text-xs text-[#C0392B]">
-                  Something went wrong. Email me directly at{' '}
-                  <a href={`mailto:${site.email}`} className="underline">
-                    {site.email}
-                  </a>
-                  .
-                </p>
+                <p className="font-mono text-xs text-[#C0392B]">Something went wrong. Email {site.email} directly.</p>
               )}
             </form>
           </Reveal>

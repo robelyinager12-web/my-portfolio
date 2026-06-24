@@ -32,7 +32,7 @@ export function Blog() {
               >
                 <div className="flex items-center gap-3 font-mono text-xs text-ink-3">
                   <span>{formatDate(post.date)}</span>
-                  <span>·</span>
+                  <span>.</span>
                   <span>{post.readMinutes} min read</span>
                 </div>
                 <h3 className="mt-3 font-display text-lg font-semibold leading-snug text-ink transition-colors group-hover:text-indigo-deep">
@@ -43,7 +43,7 @@ export function Blog() {
                 </p>
                 <div className="mt-auto pt-5">
                   <span className="font-mono text-[12.5px] text-indigo-deep">
-                    Read article →
+                    Read article
                   </span>
                 </div>
               </a>

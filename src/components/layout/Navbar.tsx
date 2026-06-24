@@ -24,7 +24,6 @@ export function Navbar() {
           <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-br from-indigo to-cyan" />
           {site.handle}
         </a>
-
         <nav className="hidden items-center gap-9 md:flex">
           {navLinks.map((link) => (
             
@@ -40,7 +39,6 @@ export function Navbar() {
             </a>
           ))}
         </nav>
-
         <div className="hidden items-center gap-4 md:flex">
           <ThemeToggle />
           
@@ -50,7 +48,6 @@ export function Navbar() {
             say hello
           </a>
         </div>
-
         <div className="flex items-center gap-3 md:hidden">
           <ThemeToggle />
           <button
@@ -63,7 +60,6 @@ export function Navbar() {
           </button>
         </div>
       </div>
-
       {open && (
         <nav className="fixed inset-y-0 right-0 z-[105] flex w-[74%] max-w-[320px] flex-col gap-6 bg-paper-3 px-8 pb-8 pt-24 shadow-2xl md:hidden">
           {navLinks.map((link) => (
