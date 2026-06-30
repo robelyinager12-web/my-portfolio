@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -20,8 +21,14 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex max-w-[1180px] items-center justify-between px-8">
-        <a href="#home" className="flex items-center gap-2 font-display text-[19px] font-semibold tracking-tight">
-          <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-br from-indigo to-cyan" />
+        <a href="#home" className="flex items-center gap-2.5 font-display text-[19px] font-semibold tracking-tight">
+          <Image
+            src="/avatar.jpg"
+            alt={site.name}
+            width={28}
+            height={28}
+            className="h-7 w-7 rounded-full object-cover"
+          />
           {site.handle}
         </a>
         <nav className="hidden items-center gap-9 md:flex">
