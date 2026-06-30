@@ -7,7 +7,9 @@ function withOpacity(varName: string) {
       : `rgb(var(${varName}))`;
 }
 
-const config: Config = {
+// Tailwind’s type definitions don’t like the function-based color generator used here.
+// Runtime output is still valid (it becomes a string), so we cast the generator values.
+const config = {
   darkMode: 'class',
   content: [
     './src/app/**/*.{ts,tsx}',
@@ -17,25 +19,25 @@ const config: Config = {
     extend: {
       colors: {
         paper: {
-          DEFAULT: withOpacity('--color-paper'),
-          2: withOpacity('--color-paper-2'),
-          3: withOpacity('--color-paper-3')
+          DEFAULT: withOpacity('--color-paper') as unknown as string,
+          2: withOpacity('--color-paper-2') as unknown as string,
+          3: withOpacity('--color-paper-3') as unknown as string
         },
         ink: {
-          DEFAULT: withOpacity('--color-ink'),
-          2: withOpacity('--color-ink-2'),
-          3: withOpacity('--color-ink-3')
+          DEFAULT: withOpacity('--color-ink') as unknown as string,
+          2: withOpacity('--color-ink-2') as unknown as string,
+          3: withOpacity('--color-ink-3') as unknown as string
         },
-        line: withOpacity('--color-line'),
-        'line-strong': withOpacity('--color-line-strong'),
+        line: withOpacity('--color-line') as unknown as string,
+        'line-strong': withOpacity('--color-line-strong') as unknown as string,
         indigo: {
-          DEFAULT: withOpacity('--color-indigo'),
-          deep: withOpacity('--color-indigo-deep')
+          DEFAULT: withOpacity('--color-indigo') as unknown as string,
+          deep: withOpacity('--color-indigo-deep') as unknown as string
         },
-        violet: withOpacity('--color-violet'),
+        violet: withOpacity('--color-violet') as unknown as string,
         cyan: {
-          DEFAULT: withOpacity('--color-cyan'),
-          deep: withOpacity('--color-cyan-deep')
+          DEFAULT: withOpacity('--color-cyan') as unknown as string,
+          deep: withOpacity('--color-cyan-deep') as unknown as string
         }
       },
       fontFamily: {
@@ -70,6 +72,7 @@ const config: Config = {
     }
   },
   plugins: []
-};
+} satisfies Config;
 
 export default config;
+

@@ -26,7 +26,7 @@ export function Navbar() {
         </a>
         <nav className="hidden items-center gap-9 md:flex">
           {navLinks.map((link) => (
-            
+            <a
               key={link.href}
               href={link.href}
               className={cn(
@@ -41,7 +41,7 @@ export function Navbar() {
         </nav>
         <div className="hidden items-center gap-4 md:flex">
           <ThemeToggle />
-          
+          <a
             href="#contact"
             className="inline-flex rounded-md border border-line-strong px-[18px] py-[9px] font-mono text-[13px] transition-all hover:bg-ink hover:text-paper"
           >
@@ -63,7 +63,7 @@ export function Navbar() {
       {open && (
         <nav className="fixed inset-y-0 right-0 z-[105] flex w-[74%] max-w-[320px] flex-col gap-6 bg-paper-3 px-8 pb-8 pt-24 shadow-2xl md:hidden">
           {navLinks.map((link) => (
-            
+            <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
@@ -72,7 +72,7 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
-          
+          <a
             href="#contact"
             onClick={() => setOpen(false)}
             className="mt-2 inline-flex w-fit rounded-md border border-line-strong px-5 py-2.5 font-mono text-sm"

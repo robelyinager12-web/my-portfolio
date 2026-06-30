@@ -56,7 +56,7 @@ export function Contact() {
             </p>
             <div className="flex flex-col gap-5">
               {socialLinks.map((link) => (
-                
+                <a
                   key={link.label}
                   href={link.href}
                   target={link.label !== 'email' ? '_blank' : undefined}

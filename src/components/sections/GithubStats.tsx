@@ -109,7 +109,7 @@ export function GithubStats() {
         {error && (
           <p className="font-mono text-sm text-ink-3">
             Could not load GitHub stats — visit{' '}
-            
+            <a
               href={`https://github.com/${site.githubUsername}`}
               className="text-indigo-deep underline"
               target="_blank"
@@ -138,7 +138,7 @@ export function GithubStats() {
               <h3 className="mb-4 font-display text-lg font-semibold">Recent repositories</h3>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {stats.repos.map((repo) => (
-                  
+                  <a
                     key={repo.id}
                     href={repo.html_url}
                     target="_blank"
