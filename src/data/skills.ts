@@ -3,27 +3,74 @@ import { SkillCategory } from '@/types';
 export const skillCategories: SkillCategory[] = [
   {
     title: 'Frontend',
-    accent: 'indigo',
-    items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Three.js', 'Tailwind CSS', 'Redux', 'Framer Motion']
+    color: 'cyan',
+    items: [
+      'React',
+      'Next.js',
+      'TypeScript',
+      'JavaScript',
+      'Three.js',
+      'Tailwind CSS',
+      'Redux',
+      'Framer Motion',
+      'HTML5',
+      'CSS3'
+    ]
   },
   {
     title: 'Backend',
-    accent: 'cyan',
-    items: ['Node.js', 'Express.js', 'NestJS', 'REST APIs', 'GraphQL', 'JWT', 'OAuth', 'WebSockets']
+    color: 'violet',
+    items: [
+      'Node.js',
+      'Express.js',
+      'NestJS',
+      'REST APIs',
+      'GraphQL',
+      'JWT Auth',
+      'OAuth 2.0',
+      'WebSockets',
+      'Socket.io'
+    ]
   },
   {
     title: 'Databases',
-    accent: 'violet',
-    items: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Prisma', 'Firebase']
+    color: 'pink',
+    items: [
+      'MongoDB',
+      'PostgreSQL',
+      'MySQL',
+      'Redis',
+      'Prisma ORM',
+      'Firebase',
+      'Mongoose'
+    ]
   },
   {
     title: 'DevOps & Cloud',
-    accent: 'ink',
-    items: ['Git', 'Docker', 'Vercel', 'AWS', 'CI/CD', 'Linux', 'Nginx']
+    color: 'cyan',
+    items: [
+      'Git',
+      'GitHub',
+      'Docker',
+      'Vercel',
+      'AWS',
+      'CI/CD',
+      'Linux',
+      'Nginx'
+    ]
   },
   {
     title: 'Software Engineering',
-    accent: 'indigo',
-    items: ['System Design', 'Microservices', 'Design Patterns', 'Data Structures', 'Algorithms', 'Software Architecture']
+    color: 'violet',
+    items: [
+      'System Design',
+      'Microservices',
+      'Design Patterns',
+      'Data Structures',
+      'Algorithms',
+      'Software Architecture',
+      'Agile / Scrum',
+      'Code Review'
+    ]
   }
 ];
