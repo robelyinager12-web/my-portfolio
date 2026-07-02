@@ -3,76 +3,188 @@
 @tailwind utilities;
 
 :root {
-  /* Light theme — RGB triplets so Tailwind's opacity modifiers work */
-  --color-paper: 248 248 244;     /* #F8F8F4 */
-  --color-paper-2: 240 240 232;    /* #F0F0E8 */
-  --color-paper-3: 255 255 255;     /* #FFFFFF */
-  --color-ink: 21 23 27;             /* #15171B */
-  --color-ink-2: 75 79 88;            /* #4B4F58 */
-  --color-ink-3: 136 139 146;          /* #888B92 */
-  --color-line: 21 23 27;               /* used with low opacity */
-  --color-line-strong: 21 23 27;
-  --color-indigo: 67 57 202;             /* #4339CA */
-  --color-indigo-deep: 46 39 144;         /* #2E2790 */
-  --color-violet: 124 58 237;              /* #7C3AED */
-  --color-cyan: 14 165 183;                 /* #0EA5B7 */
-  --color-cyan-deep: 11 111 122;             /* #0B6F7A */
+  --bg-primary: #050816;
+  --bg-secondary: #0B1120;
+  --bg-card: rgba(255, 255, 255, 0.03);
+
+  --neon-cyan: #00FFFF;
+  --neon-violet: #8B5CF6;
+  --neon-pink: #EC4899;
+
+  --neon-cyan-dim: rgba(0, 255, 255, 0.15);
+  --neon-violet-dim: rgba(139, 92, 246, 0.15);
+  --neon-pink-dim: rgba(236, 72, 153, 0.15);
+
+  --neon-cyan-glow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.2);
+  --neon-violet-glow: 0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.2);
+  --neon-pink-glow: 0 0 20px rgba(236, 72, 153, 0.5), 0 0 40px rgba(236, 72, 153, 0.2);
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-strong: rgba(139, 92, 246, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-strong: rgba(139, 92, 246, 0.35);
+  --glass-blur: 12px;
+
+  --text-primary: #E2E8F0;
+  --text-secondary: #94A3B8;
+  --text-muted: #475569;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-.dark {
-  /* Dark theme — matches the cyberpunk-leaning palette: deep navy + neon accents */
-  --color-paper: 5 8 22;          /* #050816 */
-  --color-paper-2: 11 17 32;       /* #0B1120 */
-  --color-paper-3: 15 20 38;        /* slightly lifted card surface */
-  --color-ink: 237 240 247;          /* near-white text */
-  --color-ink-2: 168 174 196;
-  --color-ink-3: 116 122 145;
-  --color-line: 255 255 255;          /* used with low opacity */
-  --color-line-strong: 255 255 255;
-  --color-indigo: 139 92 246;          /* #8B5CF6 */
-  --color-indigo-deep: 167 139 250;
-  --color-violet: 236 72 153;            /* #EC4899 */
-  --color-cyan: 0 255 255;                /* #00FFFF */
-  --color-cyan-deep: 34 211 238;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
-  background-color: rgb(var(--color-paper));
-  color: rgb(var(--color-ink));
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 section[id] {
-  scroll-margin-top: 90px;
+  scroll-margin-top: 80px;
 }
 
 ::selection {
-  background: rgb(var(--color-indigo));
-  color: rgb(var(--color-paper));
+  background: var(--neon-violet);
+  color: #ffffff;
 }
 
-/* Border opacity needs different intensity than text, so these utility
-   classes get an explicit modifier rather than relying on the raw token. */
-.border-line {
-  border-color: rgb(var(--color-line) / 0.12);
-}
-.border-line-strong {
-  border-color: rgb(var(--color-line-strong) / 0.22);
-}
-.before\:border-line::before {
-  border-color: rgb(var(--color-line) / 0.12);
+:focus-visible {
+  outline: 2px solid var(--neon-violet);
+  outline-offset: 3px;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .has-custom-cursor {
-    cursor: none;
-  }
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-violet), var(--neon-cyan));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink));
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(90deg, #00FFFF, #8B5CF6, #EC4899);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradflow 4s ease infinite;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border-strong);
+}
+
+/* Neon glow utilities */
+.glow-cyan {
+  box-shadow: var(--neon-cyan-glow);
+}
+
+.glow-violet {
+  box-shadow: var(--neon-violet-glow);
+}
+
+.glow-pink {
+  box-shadow: var(--neon-pink-glow);
+}
+
+/* Neon text glow */
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+.text-glow-violet {
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.text-glow-pink {
+  text-shadow: 0 0 10px rgba(236, 72, 153, 0.8), 0 0 20px rgba(236, 72, 153, 0.4);
+}
+
+/* Neon border utility */
+.neon-border-cyan {
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1), inset 0 0 10px rgba(0, 255, 255, 0.05);
+}
+
+.neon-border-violet {
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.1), inset 0 0 10px rgba(139, 92, 246, 0.05);
+}
+
+.neon-border-pink {
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.1), inset 0 0 10px rgba(236, 72, 153, 0.05);
+}
+
+/* Section padding */
+.section-padding {
+  padding: 120px 0;
+}
+
+/* Container */
+.container-custom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Gradient border utility */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  background: linear-gradient(135deg, #00FFFF, #8B5CF6, #EC4899);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
