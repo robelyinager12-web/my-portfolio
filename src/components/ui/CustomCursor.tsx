@@ -3,73 +3,103 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
+type CursorState = 'default' | 'hover' | 'click' | 'text';
+
 export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState(false);
-  const [hovering, setHovering] = useState(false);
+  const [cursorState, setCursorState] = useState<CursorState>('default');
   const reducedMotion = usePrefersReducedMotion();
 
-  // Only enable on devices with a real, precise pointer (desktop mice),
-  // and never if the visitor has reduced motion turned on.
+  const mouseX = useRef(0);
+  const mouseY = useRef(0);
+  const ringX = useRef(0);
+  const ringY = useRef(0);
+  const frameId = useRef<number>(0);
+
   useEffect(() => {
-    const supportsFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    setEnabled(supportsFinePointer && !reducedMotion);
+    const hasFinePointer = window.matchMedia(
+      '(hover: hover) and (pointer: fine)'
+    ).matches;
+    setEnabled(hasFinePointer && !reducedMotion);
   }, [reducedMotion]);
 
   useEffect(() => {
     if (!enabled) return;
 
-    document.body.classList.add('has-custom-cursor');
+    document.body.style.cursor = 'none';
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX = mouseX;
-    let ringY = mouseY;
-    let frameId: number;
+    function onMouseMove(e: MouseEvent) {
+      mouseX.current = e.clientX;
+      mouseY.current = e.clientY;
 
-    function handleMouseMove(e: MouseEvent) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+        dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
       }
     }
 
-    function isInteractive(target: EventTarget | null) {
-      return target instanceof HTMLElement && target.closest('a, button, input, textarea, [role="button"]');
+    function onMouseDown() {
+      setCursorState('click');
     }
 
-    function handleOver(e: MouseEvent) {
-      if (isInteractive(e.target)) setHovering(true);
+    function onMouseUp() {
+      setCursorState('default');
     }
 
-    function handleOut(e: MouseEvent) {
-      if (isInteractive(e.target)) setHovering(false);
+    function getInteractiveType(
+      target: EventTarget | null
+    ): CursorState | null {
+      if (!(target instanceof HTMLElement)) return null;
+      const el = target.closest(
+        'a, button, input, textarea, select, [role="button"], [data-cursor="hover"]'
+      );
+      if (!el) return null;
+      if (
+        target.closest('input[type="text"], input[type="email"], textarea')
+      ) {
+        return 'text';
+      }
+      return 'hover';
     }
 
-    // The ring eases toward the dot's position each frame rather than
-    // snapping instantly, which is what creates the "trailing" feel.
+    function onMouseOver(e: MouseEvent) {
+      const type = getInteractiveType(e.target);
+      if (type) setCursorState(type);
+    }
+
+    function onMouseOut(e: MouseEvent) {
+      const type = getInteractiveType(e.target);
+      if (type) setCursorState('default');
+    }
+
     function animateRing() {
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
+      const ease = 0.12;
+      ringX.current += (mouseX.current - ringX.current) * ease;
+      ringY.current += (mouseY.current - ringY.current) * ease;
+
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        ringRef.current.style.transform = `translate(${ringX.current}px, ${ringY.current}px) translate(-50%, -50%)`;
       }
-      frameId = requestAnimationFrame(animateRing);
+
+      frameId.current = requestAnimationFrame(animateRing);
     }
 
-    window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseover', handleOver);
-    document.addEventListener('mouseout', handleOut);
-    frameId = requestAnimationFrame(animateRing);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mouseover', onMouseOver);
+    document.addEventListener('mouseout', onMouseOut);
+    frameId.current = requestAnimationFrame(animateRing);
 
     return () => {
-      document.body.classList.remove('has-custom-cursor');
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseover', handleOver);
-      document.removeEventListener('mouseout', handleOut);
-      cancelAnimationFrame(frameId);
+      document.body.style.cursor = '';
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mouseover', onMouseOver);
+      document.removeEventListener('mouseout', onMouseOut);
+      cancelAnimationFrame(frameId.current);
     };
   }, [enabled]);
 
@@ -79,14 +109,58 @@ export function CustomCursor() {
     <>
       <div
         ref={dotRef}
-        className="pointer-events-none fixed left-0 top-0 z-[200] h-2 w-2 rounded-full bg-indigo"
+        className="pointer-events-none fixed left-0 top-0 z-[9999]"
+        style={{
+          width: cursorState === 'click' ? '6px' : '8px',
+          height: cursorState === 'click' ? '6px' : '8px',
+          borderRadius: '50%',
+          background:
+            cursorState === 'hover' || cursorState === 'text'
+              ? '#00FFFF'
+              : '#8B5CF6',
+          boxShadow:
+            cursorState === 'hover'
+              ? '0 0 10px rgba(0,255,255,0.8)'
+              : '0 0 10px rgba(139,92,246,0.8)',
+          transition: 'width 0.15s, height 0.15s, background 0.2s, box-shadow 0.2s'
+        }}
       />
       <div
         ref={ringRef}
-        className={`pointer-events-none fixed left-0 top-0 z-[200] rounded-full border transition-[width,height,opacity] duration-200 ease-out ${
-          hovering ? 'h-12 w-12 border-indigo bg-indigo/10' : 'h-8 w-8 border-indigo/50'
-        }`}
-        style={{ boxShadow: '0 0 20px rgb(var(--color-indigo) / 0.25)' }}
+        className="pointer-events-none fixed left-0 top-0 z-[9998]"
+        style={{
+          width:
+            cursorState === 'hover'
+              ? '48px'
+              : cursorState === 'click'
+              ? '28px'
+              : '36px',
+          height:
+            cursorState === 'hover'
+              ? '48px'
+              : cursorState === 'click'
+              ? '28px'
+              : '36px',
+          borderRadius: '50%',
+          border:
+            cursorState === 'hover'
+              ? '1.5px solid rgba(0,255,255,0.7)'
+              : cursorState === 'text'
+              ? '1.5px solid rgba(0,255,255,0.5)'
+              : '1.5px solid rgba(139,92,246,0.5)',
+          background:
+            cursorState === 'hover'
+              ? 'rgba(0,255,255,0.06)'
+              : 'transparent',
+          boxShadow:
+            cursorState === 'hover'
+              ? '0 0 20px rgba(0,255,255,0.2), inset 0 0 10px rgba(0,255,255,0.05)'
+              : cursorState === 'click'
+              ? '0 0 20px rgba(139,92,246,0.5)'
+              : '0 0 12px rgba(139,92,246,0.15)',
+          transition:
+            'width 0.25s cubic-bezier(0.25,0.46,0.45,0.94), height 0.25s cubic-bezier(0.25,0.46,0.45,0.94), border-color 0.2s, background 0.2s, box-shadow 0.2s'
+        }}
       />
     </>
   );
