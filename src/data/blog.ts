@@ -5,36 +5,40 @@ export const blogPosts: BlogPost[] = [
     slug: 'building-scalable-apis-with-nodejs',
     title: 'Building Scalable APIs with Node.js',
     excerpt:
-      'Patterns for structuring Express and Node.js APIs that stay maintainable as traffic and team size grow.',
+      'Patterns and best practices for structuring Express and Node.js APIs that stay maintainable as your codebase and team size grow — from folder structure to error handling.',
     date: '2026-04-12',
     readMinutes: 7,
-    url: '#'
+    url: '#',
+    tag: 'Backend'
   },
   {
     slug: 'nextjs-performance-optimization',
     title: 'Next.js Performance Optimization',
     excerpt:
-      'Practical techniques for cutting load times in Next.js apps — from image handling to render strategy.',
+      'Practical techniques for cutting load times in Next.js apps — covering image optimization, server vs client components, caching strategies, and Core Web Vitals.',
     date: '2026-03-02',
     readMinutes: 9,
-    url: '#'
+    url: '#',
+    tag: 'Frontend'
   },
   {
     slug: 'modern-database-design-principles',
     title: 'Modern Database Design Principles',
     excerpt:
-      'How to choose between relational and document databases, and design schemas that age well.',
+      'How to choose between relational and document databases, design schemas that age well, and avoid the common pitfalls that slow down applications as data grows.',
     date: '2026-01-18',
     readMinutes: 8,
-    url: '#'
+    url: '#',
+    tag: 'Database'
   },
   {
     slug: 'software-architecture-best-practices',
     title: 'Software Architecture Best Practices',
     excerpt:
-      'Lessons on keeping systems decoupled, testable, and easy to hand off to the next engineer.',
+      'Lessons learned from building production systems — keeping codebases decoupled, testable, and easy for the next engineer to pick up without a lengthy handover.',
     date: '2025-11-30',
     readMinutes: 10,
-    url: '#'
+    url: '#',
+    tag: 'Engineering'
   }
 ];
