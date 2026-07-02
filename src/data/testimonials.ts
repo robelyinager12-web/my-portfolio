@@ -3,20 +3,23 @@ import { Testimonial } from '@/types';
 export const testimonials: Testimonial[] = [
   {
     quote:
-      'Robel turned a vague brief into a working product in days, not weeks. The code was clean enough that our team could pick it up without a handover call.',
-    name: 'Person name',
-    role: 'Engineering Manager, Company name'
+      'Robel delivered a production-ready full-stack application ahead of schedule. His ability to own both the frontend and backend with equal confidence is rare — the code was clean, well-documented, and easy for our team to pick up.',
+    name: 'Person Name',
+    role: 'Engineering Manager',
+    company: 'Company Name'
   },
   {
     quote:
-      'Strong instincts for both the backend and the polish on the frontend. The 3D dashboard he built became the thing clients remembered most about the demo.',
-    name: 'Person name',
-    role: 'Product Lead, Company name'
+      'Outstanding problem-solving skills and excellent attention to detail. Robel built our 3D product visualizer from scratch using Three.js and it became the most talked-about feature in our client demos. Highly recommend.',
+    name: 'Person Name',
+    role: 'Product Lead',
+    company: 'Company Name'
   },
   {
     quote:
-      'Reliable, communicates clearly, and ships. Exactly what you want from a full-stack hire on a small team.',
-    name: 'Person name',
-    role: 'Founder, Company name'
+      'Reliable, communicates clearly, and ships on time. Exactly what you want from a full-stack developer on a lean team. Robel handled everything from database design to deployment without hand-holding.',
+    name: 'Person Name',
+    role: 'Founder',
+    company: 'Company Name'
   }
 ];
