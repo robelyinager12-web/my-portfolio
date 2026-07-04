@@ -1,6 +1,6 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { WireframeBackground } from '@/components/three/WireframeBackground';
+import { GlobeBackground } from '@/components/three/GlobeBackground';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Skills } from '@/components/sections/Skills';
@@ -16,7 +16,7 @@ import { Contact } from '@/components/sections/Contact';
 export default function Home() {
   return (
     <>
-      <WireframeBackground />
+      <GlobeBackground />
       <Navbar />
       <main id="main" className="relative z-[1]">
         <Hero />
