@@ -44,16 +44,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={[display.variable, body.variable, mono.variable].join(' ')} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: `
-          try {
-            var t = localStorage.getItem('theme');
-            if (t === 'light') {
-              document.documentElement.classList.add('light');
-            }
-          } catch(e) {}
-        `}} />
-      </head>
       <body className="font-body antialiased bg-bg-primary text-text-primary">
         <CustomCursor />
         {children}
