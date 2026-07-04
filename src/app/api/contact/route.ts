@@ -12,11 +12,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Basic email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: 'Invalid email address.' },
+        { status: 400 }
+      );
+    }
+
+    if (message.length < 10) {
+      return NextResponse.json(
+        { error: 'Message is too short.' },
         { status: 400 }
       );
     }
@@ -28,18 +34,18 @@ export async function POST(request: NextRequest) {
     // const resend = new Resend(process.env.RESEND_API_KEY);
     // await resend.emails.send({
     //   from: 'portfolio@yourdomain.com',
-    //   to: process.env.CONTACT_TO_EMAIL!,
-    //   subject: `[Portfolio] ${subject} — from ${name}`,
-    //   text: `From: ${name} <${email}>\n\n${message}`,
+    //   to: process.env.CONTACT_TO_EMAIL,
+    //   subject: '[Portfolio] ' + subject + ' from ' + name,
+    //   text: 'From: ' + name + ' <' + email + '>\n\n' + message,
     //   replyTo: email
     // });
 
     console.log('Contact form submission:', { name, email, subject, message });
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, message: 'Message received successfully.' });
   } catch {
     return NextResponse.json(
-      { error: 'Invalid request.' },
+      { error: 'Invalid request. Please try again.' },
       { status: 400 }
     );
   }
