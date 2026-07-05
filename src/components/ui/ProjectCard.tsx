@@ -10,8 +10,8 @@ export function ProjectCard({ project }: { project: Project }) {
         style={{ background: 'linear-gradient(135deg, #1B1D27, #2B2840 55%, #16323A)' }}
       >
         <svg viewBox="0 0 300 160" className="absolute inset-0 h-full w-full opacity-55">
-          <polygon points="40,20 120,40 90,110 20,90" fill="none" stroke={project.accentFrom} strokeWidth={1} />
-          <polygon points="160,15 260,35 230,120 150,100" fill="none" stroke={project.accentTo} strokeWidth={1} />
+          <polygon points="40,20 120,40 90,110 20,90" fill="none" stroke={project.accentColor} strokeWidth={1} />
+          <polygon points="160,15 260,35 230,120 150,100" fill="none" stroke={project.accentColor} strokeWidth={1} />
         </svg>
         <span className="absolute bottom-3 left-3.5 font-mono text-[11px] tracking-wide text-[#CFD2E6]">
           /{project.slug}

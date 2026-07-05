@@ -4,7 +4,8 @@ import { useTypewriter } from '@/hooks/useTypewriter';
 import { terminalLines, typedStatuses } from '@/data/site';
 
 export function TerminalCard() {
-  const typed = useTypewriter(typedStatuses);
+  const { text: typed } = useTypewriter(typedStatuses);
+
 
   return (
     <div className="overflow-hidden rounded-xl border border-white/[0.06] bg-[#161821] shadow-[0_30px_60px_-20px_rgba(21,23,27,0.35)]">
