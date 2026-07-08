@@ -6,6 +6,7 @@ import { Skills } from '@/components/sections/Skills';
 import { Services } from '@/components/sections/Services';
 import { Tools } from '@/components/sections/Tools';
 import { Projects } from '@/components/sections/Projects';
+import { Pricing } from '@/components/sections/Pricing';
 
 export default function Page() {
   return (
@@ -19,6 +20,7 @@ export default function Page() {
         <Services />
         <Tools />
         <Projects />
+        <Pricing />
       </main>
     </>
   );
