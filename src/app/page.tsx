@@ -4,6 +4,7 @@ import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Skills } from '@/components/sections/Skills';
 import { Services } from '@/components/sections/Services';
+import { Tools } from '@/components/sections/Tools';
 
 export default function Page() {
   return (
@@ -15,6 +16,7 @@ export default function Page() {
         <About />
         <Skills />
         <Services />
+        <Tools />
       </main>
     </>
   );
