@@ -7,6 +7,7 @@ import { Skills } from '@/components/sections/Skills';
 import { Services } from '@/components/sections/Services';
 import { Tools } from '@/components/sections/Tools';
 import { Projects } from '@/components/sections/Projects';
+import { Process } from '@/components/sections/Process';
 import { Pricing } from '@/components/sections/Pricing';
 import { FAQ } from '@/components/sections/FAQ';
 import { Contact } from '@/components/sections/Contact';
@@ -23,6 +24,7 @@ export default function Page() {
         <Services />
         <Tools />
         <Projects />
+        <Process />
         <Pricing />
         <FAQ />
         <Contact />
