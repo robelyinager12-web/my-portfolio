@@ -2,38 +2,38 @@ import { EducationItem } from '@/types';
 
 export const education: EducationItem[] = [
   {
-    period: '2018 — 2022',
-    title: 'B.Sc. in Computer Science',
-    institution: 'University Name',
-    note: 'Focus on software engineering, data structures, algorithms and computer networks',
+    period: '2022 — Present',
+    title: 'B.Sc. Software Engineering',
+    institution: 'University of Injibara, Ethiopia',
+    note: 'Coursework: Web Development · Database Systems · Data Structures & Algorithms · Software Design · UI/UX · OOP',
     type: 'degree'
   },
   {
-    period: '2023',
-    title: 'Meta Front-End Developer Certificate',
-    institution: 'Meta (via Coursera)',
-    note: 'React, responsive UI design, version control and front-end best practices',
+    period: 'February 2026',
+    title: 'Programming Fundamentals (Nanodegree)',
+    institution: 'Udacity — Global Chapters Ethiopia',
+    note: 'Ministry of Labor and Skills — 5 Million Ethiopian Coders Initiative',
     type: 'certification'
   },
   {
-    period: '2023',
-    title: 'AWS Cloud Practitioner',
-    institution: 'Amazon Web Services',
-    note: 'Cloud infrastructure, core AWS services, security and deployment fundamentals',
+    period: 'March 2026',
+    title: 'AI Fundamentals',
+    institution: 'Udacity — Global Chapters Ethiopia',
+    note: 'Artificial Intelligence fundamentals and practical applications',
     type: 'certification'
   },
   {
-    period: '2022',
-    title: 'Google IT Automation with Python',
-    institution: 'Google (via Coursera)',
-    note: 'Python scripting, automation, configuration management and version control',
+    period: 'June 2026',
+    title: 'Data Fundamentals',
+    institution: 'Udacity — Global Chapters Ethiopia',
+    note: 'Data analysis, visualization and fundamentals',
     type: 'certification'
   },
   {
-    period: '2022',
-    title: 'MongoDB Developer Certification',
-    institution: 'MongoDB University',
-    note: 'Schema design, aggregation pipelines, indexing strategies and performance tuning',
+    period: 'June 2026',
+    title: 'Android Fundamentals',
+    institution: 'Udacity — Global Chapters Ethiopia',
+    note: 'Android development with Kotlin and Jetpack Compose',
     type: 'certification'
   }
 ];

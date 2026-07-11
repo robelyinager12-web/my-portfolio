@@ -4,73 +4,31 @@ export const skillCategories: SkillCategory[] = [
   {
     title: 'Frontend',
     color: 'cyan',
-    items: [
-      'React',
-      'Next.js',
-      'TypeScript',
-      'JavaScript',
-      'Three.js',
-      'Tailwind CSS',
-      'Redux',
-      'Framer Motion',
-      'HTML5',
-      'CSS3'
-    ]
+    items: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Bootstrap']
   },
   {
     title: 'Backend',
     color: 'violet',
-    items: [
-      'Node.js',
-      'Express.js',
-      'NestJS',
-      'REST APIs',
-      'GraphQL',
-      'JWT Auth',
-      'OAuth 2.0',
-      'WebSockets',
-      'Socket.io'
-    ]
+    items: ['Node.js', 'NestJS', 'Express.js', 'Firebase', 'REST APIs', 'GraphQL']
   },
   {
     title: 'Databases',
     color: 'pink',
-    items: [
-      'MongoDB',
-      'PostgreSQL',
-      'MySQL',
-      'Redis',
-      'Prisma ORM',
-      'Firebase',
-      'Mongoose'
-    ]
+    items: ['PostgreSQL', 'MongoDB', 'MySQL', 'SQLite', 'Redis']
   },
   {
-    title: 'DevOps & Cloud',
+    title: 'Tools & DevOps',
     color: 'cyan',
-    items: [
-      'Git',
-      'GitHub',
-      'Docker',
-      'Vercel',
-      'AWS',
-      'CI/CD',
-      'Linux',
-      'Nginx'
-    ]
+    items: ['Git', 'GitHub', 'Docker', 'Linux', 'Postman', 'VS Code']
   },
   {
-    title: 'Software Engineering',
+    title: 'Cloud & Hosting',
     color: 'violet',
-    items: [
-      'System Design',
-      'Microservices',
-      'Design Patterns',
-      'Data Structures',
-      'Algorithms',
-      'Software Architecture',
-      'Agile / Scrum',
-      'Code Review'
-    ]
+    items: ['AWS', 'Google Cloud', 'Firebase', 'Vercel', 'Netlify']
+  },
+  {
+    title: 'AI & ML',
+    color: 'pink',
+    items: ['Python', 'TensorFlow', 'PyTorch', 'Pandas', 'NumPy', 'Scikit-learn']
   }
 ];

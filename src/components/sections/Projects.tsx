@@ -141,7 +141,7 @@ export function Projects() {
                   </span>
                 </div>
                 <div className="absolute bottom-3 left-4">
-                  <span className="font-mono text-[10px] text-white/40 tracking-widest">// {project.category}</span>
+                  <span className="font-mono text-[10px] text-white/40 tracking-widest">{'// ' + project.category}</span>
                 </div>
                 <AnimatePresence>
                   {hovered === i && (
@@ -159,7 +159,7 @@ export function Projects() {
 
               <div className="p-5">
                 <div className="mb-1">
-                  <span className="font-mono text-[10px] text-gray-500 tracking-widest">// {project.category}</span>
+                  <span className="font-mono text-[10px] text-gray-500 tracking-widest">{'// ' + project.category}</span>
                 </div>
                 <h3 className="font-display font-bold text-lg text-white mb-2 group-hover:text-neon-cyan transition-colors duration-300">{project.title}</h3>
                 <div className="flex items-center gap-4 mb-3">

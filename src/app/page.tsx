@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
 import { GlobeBackground } from '@/components/three/GlobeBackground';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
@@ -7,6 +8,8 @@ import { Services } from '@/components/sections/Services';
 import { Tools } from '@/components/sections/Tools';
 import { Projects } from '@/components/sections/Projects';
 import { Pricing } from '@/components/sections/Pricing';
+import { FAQ } from '@/components/sections/FAQ';
+import { Contact } from '@/components/sections/Contact';
 
 export default function Page() {
   return (
@@ -21,7 +24,10 @@ export default function Page() {
         <Tools />
         <Projects />
         <Pricing />
+        <FAQ />
+        <Contact />
       </main>
+      <Footer />
     </>
   );
 }

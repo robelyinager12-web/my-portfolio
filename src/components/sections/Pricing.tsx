@@ -142,6 +142,9 @@ export function Pricing() {
                 </div>
 
                 
+
+
+                <a
                   href="#contact"
                   className={cn(
                     'flex items-center justify-center gap-2 w-full py-3.5 rounded-full font-mono font-bold text-sm transition-all duration-300',
