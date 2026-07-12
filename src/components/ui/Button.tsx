@@ -48,7 +48,7 @@ const variantStyles: Record<Variant, string> = {
   outline: [
     'relative overflow-hidden',
     'bg-transparent',
-    'border border-glass-border',
+    '',
     'text-text-secondary',
     'hover:border-neon-cyan/50',
     'hover:bg-neon-cyan/5',

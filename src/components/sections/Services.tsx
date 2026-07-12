@@ -53,7 +53,7 @@ export function Services() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-violet to-neon-cyan">Services</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">End-to-end digital solutions engineered with precision, creativity, and relentless attention to performance.</p>
-            <div className="flex flex-wrap items-center justify-center gap-6 mt-8 px-6 py-4 rounded-2xl bg-white/3 border border-white/8 max-w-2xl mx-auto">
+            <div className="flex flex-wrap items-center justify-center gap-6 mt-8 px-6 py-4 rounded-2xl bg-white/3  max-w-2xl mx-auto">
               <span className="flex items-center gap-2 font-mono text-sm text-yellow-400"><span>⚡</span> Fast Delivery</span>
               <span className="text-white/20">|</span>
               <span className="flex items-center gap-2 font-mono text-sm text-neon-violet"><span>🔒</span> Secure by Default</span>
@@ -97,7 +97,7 @@ export function Services() {
             <p className="text-gray-400 max-w-xl mx-auto mb-8">Nine pillars of excellence. Click any card to explore full details.</p>
             <div className="flex flex-wrap gap-2 justify-center">
               {filterTabs.map(tab => (
-                <button key={tab} onClick={() => setActiveFilter(tab)} className={cn('px-4 py-2 rounded-full font-mono text-sm transition-all duration-200', activeFilter === tab ? 'bg-gradient-to-r from-neon-cyan to-neon-violet text-black font-bold shadow-[0_0_15px_rgba(0,255,255,0.3)]' : 'bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20')}>
+                <button key={tab} onClick={() => setActiveFilter(tab)} className={cn('px-4 py-2 rounded-full font-mono text-sm transition-all duration-200', activeFilter === tab ? 'bg-gradient-to-r from-neon-cyan to-neon-violet text-black font-bold shadow-[0_0_15px_rgba(0,255,255,0.3)]' : 'bg-white/5  text-gray-400 hover:text-white hover:border-white/20')}>
                   {tab}
                 </button>
               ))}
@@ -107,7 +107,7 @@ export function Services() {
           <AnimatePresence mode="wait">
             <motion.div key={activeFilter} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {filtered.map((item, i) => (
-                <motion.div key={item.num} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.06 }} className="p-6 rounded-2xl bg-white/3 border border-white/8 hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300 group" whileHover={{ y: -4 }}>
+                <motion.div key={item.num} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.06 }} className="p-6 rounded-2xl bg-white/3  hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300 group" whileHover={{ y: -4 }}>
                   <div className="text-4xl font-display font-black text-neon-cyan mb-4 opacity-60">{item.num}</div>
                   <h4 className="font-display font-bold text-lg text-white mb-3 group-hover:text-neon-cyan transition-colors duration-300">{item.title}</h4>
                   <p className="text-gray-400 text-sm leading-relaxed mb-5">{item.desc}</p>

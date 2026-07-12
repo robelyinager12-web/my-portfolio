@@ -51,7 +51,7 @@ export function Tools() {
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="flex flex-wrap gap-3 justify-center mb-12">
           {tools.map((tool, i) => (
-            <motion.div key={tool.name} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.03 }} whileHover={{ y: -4, scale: 1.05 }} className={cn('flex items-center gap-2.5 px-5 py-3 rounded-full', 'bg-white/3 border border-white/8', 'font-mono text-sm text-gray-300', 'cursor-default transition-all duration-300', tool.color)}>
+            <motion.div key={tool.name} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.03 }} whileHover={{ y: -4, scale: 1.05 }} className={cn('flex items-center gap-2.5 px-5 py-3 rounded-full', 'bg-white/3 ', 'font-mono text-sm text-gray-300', 'cursor-default transition-all duration-300', tool.color)}>
               <span className="text-xl">{tool.emoji}</span>
               <span>{tool.name}</span>
             </motion.div>
@@ -67,7 +67,7 @@ export function Tools() {
             transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
           >
             {scrollTools.map((tool, i) => (
-              <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/3 border border-white/8 font-mono text-xs text-gray-500 whitespace-nowrap flex-shrink-0">
+              <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/3  font-mono text-xs text-gray-500 whitespace-nowrap flex-shrink-0">
                 <span>{tool.emoji}</span>
                 <span className="text-neon-cyan">+</span>
                 <span className="uppercase tracking-widest">{tool.name}</span>
@@ -83,7 +83,7 @@ export function Tools() {
             { label: 'Database', count: '4+', icon: '🗄️', color: 'text-neon-pink' },
             { label: 'DevOps', count: '3+', icon: '☁️', color: 'text-yellow-400' }
           ].map((cat, i) => (
-            <motion.div key={cat.label} className="p-5 rounded-2xl text-center bg-white/3 border border-white/8 hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300" whileHover={{ y: -4 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
+            <motion.div key={cat.label} className="p-5 rounded-2xl text-center bg-white/3  hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300" whileHover={{ y: -4 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
               <div className="text-3xl mb-2">{cat.icon}</div>
               <div className={cn('font-display font-black text-2xl mb-1', cat.color)}>{cat.count}</div>
               <div className="font-mono text-xs text-gray-500 uppercase tracking-widest">{cat.label} tools</div>

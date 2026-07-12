@@ -99,7 +99,7 @@ export function Projects() {
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">A curated collection of full-stack applications, UI experiments, and real-time systems built with passion and precision.</p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="flex items-center justify-center gap-8 py-4 px-8 rounded-2xl bg-white/3 border border-white/8 max-w-lg mx-auto mb-14">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="flex items-center justify-center gap-8 py-4 px-8 rounded-2xl bg-white/3  max-w-lg mx-auto mb-14">
           {[
             { value: '20+', label: 'PROJECTS', color: 'text-neon-cyan' },
             { value: '15+', label: 'TECHNOLOGIES', color: 'text-neon-violet' },
@@ -170,10 +170,10 @@ export function Projects() {
                 <p className="text-gray-400 text-xs leading-relaxed mb-4">{project.desc}</p>
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {project.tags.map(tag => (
-                    <span key={tag} className="px-2 py-0.5 rounded-full bg-white/5 border border-white/8 font-mono text-[10px] text-gray-400">{tag}</span>
+                    <span key={tag} className="px-2 py-0.5 rounded-full bg-white/5  font-mono text-[10px] text-gray-400">{tag}</span>
                   ))}
                 </div>
-                <div className="flex items-center justify-center gap-3 pt-3 border-t border-white/8">
+                <div className="flex items-center justify-center gap-3 pt-3 ">
                   <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 rounded-full bg-neon-cyan/10 border border-neon-cyan/20 hover:bg-neon-cyan/20 hover:border-neon-cyan/50 transition-all duration-200">
                     <Github size={16} className="text-neon-cyan" />
                   </a>

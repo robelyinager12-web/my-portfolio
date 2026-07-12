@@ -40,7 +40,7 @@ function SkillBar({ skill, index }: { skill: typeof skillsData[0]; index: number
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.05 }}
-      className="p-5 rounded-2xl bg-white/3 border border-white/8 hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300 group"
+      className="p-5 rounded-2xl bg-white/3  hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300 group"
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
@@ -92,7 +92,7 @@ export function Skills() {
                 'px-6 py-2.5 rounded-full font-mono text-sm font-semibold transition-all duration-300',
                 activeTab === i
                   ? 'bg-gradient-to-r from-neon-cyan to-neon-violet text-black shadow-[0_0_20px_rgba(0,255,255,0.3)]'
-                  : 'bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20'
+                  : 'bg-white/5  text-gray-400 hover:text-white hover:border-white/20'
               )}
             >
               {tab}
@@ -112,7 +112,7 @@ export function Skills() {
           {activeTab === 1 && (
             <motion.div key="experience" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }} className="space-y-6 max-w-3xl mx-auto">
               {experienceData.map((item, i) => (
-                <motion.div key={item.role} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="p-6 rounded-2xl bg-white/3 border border-white/8 hover:border-neon-cyan/30 transition-all duration-300">
+                <motion.div key={item.role} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="p-6 rounded-2xl bg-white/3  hover:border-neon-cyan/30 transition-all duration-300">
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                     <div>
                       <h3 className="font-display font-bold text-lg text-white">{item.role}</h3>
@@ -141,7 +141,7 @@ export function Skills() {
           {activeTab === 2 && (
             <motion.div key="services" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {servicesData.map((service, i) => (
-                <motion.div key={service.title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} className="p-6 rounded-2xl bg-white/3 border border-white/8 hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300 group" whileHover={{ y: -4 }}>
+                <motion.div key={service.title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} className="p-6 rounded-2xl bg-white/3  hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300 group" whileHover={{ y: -4 }}>
                   <div className="text-4xl mb-4">{service.icon}</div>
                   <h3 className="font-display font-bold text-white text-lg mb-2 group-hover:text-neon-cyan transition-colors duration-300">{service.title}</h3>
                   <p className="text-gray-400 text-sm leading-relaxed">{service.desc}</p>

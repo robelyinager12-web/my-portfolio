@@ -160,7 +160,7 @@ export function Pricing() {
           })}
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="mt-12 p-6 rounded-2xl bg-white/3 border border-white/8 text-center max-w-2xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="mt-12 p-6 rounded-2xl bg-white/3  text-center max-w-2xl mx-auto">
           <p className="font-mono text-sm text-gray-400 mb-3">
             Not sure which plan fits your needs?
           </p>

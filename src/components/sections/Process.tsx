@@ -103,7 +103,7 @@ export function Process() {
               transition={{ delay: i * 0.08 }}
               whileHover={{ y: -8, scale: 1.02 }}
               className={cn(
-                'relative p-7 rounded-2xl border border-white/8 bg-white/3 backdrop-blur-sm',
+                'relative p-7 rounded-2xl  bg-white/3 backdrop-blur-sm',
                 'transition-all duration-300 group overflow-hidden cursor-default',
                 phase.border, phase.shadow
               )}

@@ -2,50 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
 :root {
-  --bg-primary: #050816;
-  --bg-secondary: #0B1120;
-  --neon-cyan: #00E5FF;
-  --neon-violet: #8B5CF6;
-  --neon-pink: #EC4899;
+  --c-cyan: #00E5FF;
+  --c-violet: #8B5CF6;
+  --c-pink: #EC4899;
+  --c-bg: #050816;
+  --c-bg2: #0B1120;
+  --c-text: #CDD5E0;
+  --c-muted: #64748B;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
 body {
-  background-color: #050816;
-  color: #E2E8F0;
-  font-family: var(--font-body);
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
+  font-size: 16px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  line-height: 1.6;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.15;
+  color: #ffffff;
 }
 
-p { font-weight: 400; }
+p { font-weight: 400; color: var(--c-text); }
 
-strong { font-weight: 600; }
+a { text-decoration: none; color: inherit; }
 
-::selection { background: #8B5CF6; color: #fff; }
+::selection { background: var(--c-violet); color: #fff; }
 
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #0B1120; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--c-bg2); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00E5FF, #8B5CF6, #EC4899);
-  border-radius: 3px;
+  background: linear-gradient(180deg, var(--c-cyan), var(--c-violet), var(--c-pink));
+  border-radius: 4px;
 }
 
-.gradient-text {
-  background: linear-gradient(90deg, #00E5FF, #8B5CF6, #EC4899);
+@keyframes gradflow {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes floatY {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse2 {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.15); }
+}
+
+@keyframes particleFloat {
+  0%,100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  33% { transform: translateY(-20px) translateX(8px); opacity: 0.8; }
+  66% { transform: translateY(-8px) translateX(-6px); opacity: 0.5; }
+}
+
+.grad-text {
+  background: linear-gradient(90deg, var(--c-cyan), var(--c-violet), var(--c-pink));
   background-size: 300% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -53,53 +88,16 @@ strong { font-weight: 600; }
   animation: gradflow 4s ease infinite;
 }
 
-.glass {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.floating-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #00E5FF;
-  box-shadow: 0 0 15px rgba(0,229,255,0.8);
-  position: absolute;
-  animation: floatDot 3s ease-in-out infinite;
-}
-
-@keyframes floatDot {
-  0%, 100% { transform: translate(0, 0); }
-  33% { transform: translate(8px, -12px); }
-  66% { transform: translate(-6px, 8px); }
-}
-
-@keyframes gradflow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .animate-blink { animation: blink 1s step-end infinite; }
-.animate-float { animation: float 4s ease-in-out infinite; }
-.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+.animate-float { animation: floatY 4s ease-in-out infinite; }
+.animate-spin-slow { animation: spinSlow 20s linear infinite; }
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: particleFloat 4s ease-in-out infinite;
+  pointer-events: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
