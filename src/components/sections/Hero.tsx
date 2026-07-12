@@ -31,7 +31,21 @@ function ParticleBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {particles.map(p => (
-        <motion.div key={p.id} className="absolute rounded-full" style={{ left: p.left + '%', top: p.top + '%', width: p.size + 'px', height: p.size + 'px', background: p.color, boxShadow: `0 0 ${p.size * 4}px ${p.color}`, opacity: 0.5 }} animate={{ y: [0, -25, 0], opacity: [0.2, 0.7, 0.2] }} transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }} />
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full"
+          style={{
+            left: p.left + '%',
+            top: p.top + '%',
+            width: p.size + 'px',
+            height: p.size + 'px',
+            background: p.color,
+            boxShadow: `0 0 ${p.size * 4}px ${p.color}`,
+            opacity: 0.5
+          }}
+          animate={{ y: [0, -25, 0], opacity: [0.2, 0.7, 0.2] }}
+          transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }}
+        />
       ))}
     </div>
   );
@@ -56,17 +70,14 @@ function ParallaxPhoto() {
 
   return (
     <div ref={ref} onMouseMove={handleMouse} onMouseLeave={handleLeave} className="relative flex items-center justify-center cursor-none" style={{ perspective: '1000px' }}>
-      <div className="absolute w-[340px] h-[340px] md:w-[420px] md:h-[420px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.3) 0%, rgba(236,72,153,0.15) 50%, transparent 70%)' }} />
-
-      <motion.div style={{ rotateX, rotateY, x: moveX, y: moveY }} className="relative w-[270px] h-[270px] md:w-[340px] md:h-[340px] lg:w-[380px] lg:h-[380px]">
+      <div className="absolute w-[340px] h-[340px] md:w-[420px] md:h-[420px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.25) 0%, rgba(236,72,153,0.1) 50%, transparent 70%)' }} />
+      <motion.div style={{ rotateX, rotateY, x: moveX, y: moveY }} className="relative w-[260px] h-[260px] md:w-[320px] md:h-[320px] lg:w-[360px] lg:h-[360px]">
         <motion.div className="absolute inset-0 rounded-full" style={{ background: 'conic-gradient(from 0deg, #00E5FF 0%, #8B5CF6 25%, #EC4899 50%, #8B5CF6 75%, #00E5FF 100%)', padding: '3px', borderRadius: '50%' }} animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}>
           <div className="w-full h-full rounded-full bg-[#050816]" />
         </motion.div>
-
         <div className="absolute inset-[3px] rounded-full overflow-hidden">
-          <Image src="/avatar.jpg" alt="Robel Yinager" fill className="object-cover object-top" priority style={{ borderRadius: '50%' }} />
+          <Image src="/avatar.jpg" alt="Robel Yinager" fill className="object-cover object-top rounded-full" priority style={{ borderRadius: '50%' }} />
         </div>
-
         <motion.div className="absolute inset-[-14px] rounded-full border border-neon-violet/20" animate={{ rotate: -360 }} transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}>
           <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-neon-cyan shadow-[0_0_12px_2px_rgba(0,229,255,0.8)]" />
         </motion.div>
@@ -74,22 +85,21 @@ function ParallaxPhoto() {
           <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-neon-pink shadow-[0_0_8px_rgba(236,72,153,0.8)]" />
         </motion.div>
       </motion.div>
-
-      <motion.div className="absolute -top-6 right-4 flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-neon-cyan/40 backdrop-blur-md" style={{ x: useTransform(x, [-0.5, 0.5], [8, -8]), y: useTransform(y, [-0.5, 0.5], [-4, 4]) }} animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}>
+      <motion.div className="absolute -top-6 right-4 flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-neon-cyan/40 backdrop-blur-md" animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}>
         <span className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse" />
-        <span className="font-mono text-xs text-neon-cyan font-medium">Open to Work</span>
+        <span className="font-mono text-xs text-neon-cyan">Open to Work</span>
       </motion.div>
-      <motion.div className="absolute top-1/3 -right-2 translate-x-full flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-yellow-400/30 backdrop-blur-md" style={{ x: useTransform(x, [-0.5, 0.5], [6, -6]) }} animate={{ y: [0, 8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}>
+      <motion.div className="absolute top-1/3 -right-2 translate-x-full flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-yellow-400/30 backdrop-blur-md" animate={{ y: [0, 8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}>
         <span className="text-yellow-400 text-sm">⚡</span>
-        <span className="font-mono text-xs text-yellow-400 font-medium">Clean Code</span>
+        <span className="font-mono text-xs text-yellow-400">Clean Code</span>
       </motion.div>
-      <motion.div className="absolute -bottom-6 right-8 flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-neon-violet/30 backdrop-blur-md" style={{ y: useTransform(y, [-0.5, 0.5], [6, -6]) }} animate={{ y: [0, -6, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}>
+      <motion.div className="absolute -bottom-6 right-8 flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-neon-violet/30 backdrop-blur-md" animate={{ y: [0, -6, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}>
         <span className="text-base">🌐</span>
-        <span className="font-mono text-xs text-neon-violet font-medium">MERN Stack</span>
+        <span className="font-mono text-xs text-neon-violet">MERN Stack</span>
       </motion.div>
-      <motion.div className="absolute top-2 left-0 -translate-x-full flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-neon-pink/30 backdrop-blur-md" style={{ x: useTransform(x, [-0.5, 0.5], [-6, 6]) }} animate={{ y: [0, 6, 0] }} transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}>
-        <span className="text-neon-pink text-sm font-bold">20+</span>
-        <span className="font-mono text-xs text-neon-pink font-medium">Projects</span>
+      <motion.div className="absolute top-2 left-0 -translate-x-full flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-neon-pink/30 backdrop-blur-md" animate={{ y: [0, 6, 0] }} transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}>
+        <span className="text-neon-pink text-sm font-medium">20+</span>
+        <span className="font-mono text-xs text-neon-pink">Projects</span>
       </motion.div>
     </div>
   );
@@ -97,11 +107,11 @@ function ParallaxPhoto() {
 
 export function Hero() {
   const { text: roleText } = useTypewriter(site.roles, { typingSpeed: 70, deletingSpeed: 35, pauseDuration: 2000 });
+
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 pb-12 overflow-hidden">
       <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(0,229,255,0.08) 0%, transparent 60%), radial-gradient(ellipse at 60% 80%, rgba(236,72,153,0.06) 0%, transparent 60%), linear-gradient(135deg, #050816 0%, #0B1120 50%, #050816 100%)' }} />
       <ParticleBackground />
-
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div className="space-y-6 order-2 lg:order-1">
@@ -111,21 +121,27 @@ export function Hero() {
                 <span className="font-mono text-neon-cyan text-xs tracking-[0.25em] uppercase">Welcome to my universe</span>
                 <div className="h-px w-10 bg-gradient-to-l from-neon-cyan to-transparent" />
               </div>
-              <h1 className="font-display leading-tight">
-                <span className="block text-gray-400 text-[clamp(1.2rem,2.5vw,1.7rem)] font-medium mb-1">Hi, I&apos;m</span>
-                <span className="block text-white font-bold text-[clamp(2.8rem,5.5vw,4.5rem)] leading-none mb-3">{site.name}</span>
-                <div className="flex items-center gap-2 min-h-[3rem]">
-                  <span className="text-neon-cyan text-[clamp(1.4rem,2.8vw,2.2rem)] font-semibold">&lt;</span>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-neon-violet to-neon-pink text-[clamp(1rem,2.2vw,1.8rem)] font-semibold">{roleText}</span>
-                  <span className="text-neon-cyan text-[clamp(1.4rem,2.8vw,2.2rem)] font-semibold animate-blink">|</span>
-                  <span className="text-neon-cyan text-[clamp(1.4rem,2.8vw,2.2rem)] font-semibold"> /&gt;</span>
+              <div className="space-y-1">
+                <p style={{ fontSize: 'clamp(1.1rem,2.2vw,1.5rem)', fontWeight: 400, color: '#94A3B8', fontFamily: 'var(--font-display)' }}>
+                  Hi, I&apos;m
+                </p>
+                <h1 style={{ fontSize: 'clamp(2.8rem,5.5vw,4.5rem)', fontWeight: 600, color: '#ffffff', fontFamily: 'var(--font-display)', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
+                  {site.name}
+                </h1>
+                <div className="flex items-center gap-2 pt-1" style={{ minHeight: '3rem' }}>
+                  <span style={{ color: '#00E5FF', fontSize: 'clamp(1.3rem,2.6vw,2rem)', fontWeight: 500, fontFamily: 'var(--font-display)' }}>&lt;</span>
+                  <span style={{ background: 'linear-gradient(90deg, #00E5FF, #8B5CF6, #EC4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontSize: 'clamp(1rem,2vw,1.6rem)', fontWeight: 500, fontFamily: 'var(--font-display)' }}>
+                    {roleText}
+                  </span>
+                  <span style={{ color: '#00E5FF', fontSize: 'clamp(1.3rem,2.6vw,2rem)', fontWeight: 400 }} className="animate-blink">|</span>
+                  <span style={{ color: '#00E5FF', fontSize: 'clamp(1.3rem,2.6vw,2rem)', fontWeight: 500, fontFamily: 'var(--font-display)' }}> /&gt;</span>
                 </div>
-              </h1>
+              </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="space-y-3 text-gray-400 text-[15px] leading-relaxed max-w-lg">
-              <p>Passionate full stack developer who thrives on building <span className="text-neon-cyan font-medium">seamless digital experiences</span> from front to back.</p>
-              <p>Specializing in <span className="text-neon-violet font-medium">MERN stack solutions</span> and solving complex architecture challenges with precision and creativity.</p>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="space-y-3 max-w-lg" style={{ color: '#94A3B8', fontSize: '15px', lineHeight: '1.7', fontWeight: 400 }}>
+              <p>Passionate full stack developer who thrives on building <span style={{ color: '#00E5FF', fontWeight: 500 }}>seamless digital experiences</span> from front to back.</p>
+              <p>Specializing in <span style={{ color: '#8B5CF6', fontWeight: 500 }}>MERN stack solutions</span> and solving complex architecture challenges with precision and creativity.</p>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-2">
@@ -138,16 +154,16 @@ export function Hero() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}>
               <div className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl bg-white/3 border border-white/8 font-mono text-sm flex-wrap">
-                <span className="text-gray-500">const</span>
-                <span className="text-neon-cyan">developer</span>
-                <span className="text-gray-500">=</span>
-                <span className="text-gray-300">&#123;</span>
-                <span className="text-neon-pink">passion</span><span className="text-gray-500">:</span><span className="text-green-400">&quot;&#8734;&quot;</span>
-                <span className="text-gray-300">,</span>
-                <span className="text-neon-pink">coffee</span><span className="text-gray-500">:</span><span className="text-green-400">&quot;daily&quot;</span>
-                <span className="text-gray-300">,</span>
-                <span className="text-neon-pink">bugs</span><span className="text-gray-500">:</span><span className="text-neon-violet">0</span>
-                <span className="text-gray-300">&#125;</span>
+                <span style={{ color: '#475569' }}>const</span>
+                <span style={{ color: '#00E5FF' }}>developer</span>
+                <span style={{ color: '#475569' }}>=</span>
+                <span style={{ color: '#E2E8F0' }}>&#123;</span>
+                <span style={{ color: '#EC4899' }}>passion</span><span style={{ color: '#475569' }}>:</span><span style={{ color: '#4ADE80' }}>&quot;&#8734;&quot;</span>
+                <span style={{ color: '#E2E8F0' }}>,</span>
+                <span style={{ color: '#EC4899' }}>coffee</span><span style={{ color: '#475569' }}>:</span><span style={{ color: '#4ADE80' }}>&quot;daily&quot;</span>
+                <span style={{ color: '#E2E8F0' }}>,</span>
+                <span style={{ color: '#EC4899' }}>bugs</span><span style={{ color: '#475569' }}>:</span><span style={{ color: '#8B5CF6' }}>0</span>
+                <span style={{ color: '#E2E8F0' }}>&#125;</span>
               </div>
             </motion.div>
 
@@ -160,10 +176,10 @@ export function Hero() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="flex flex-wrap gap-4">
-              <a href="#contact" className="flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-neon-cyan to-neon-violet text-black font-mono font-semibold text-sm hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] hover:scale-105 transition-all duration-300">
+              <a href="#contact" className="flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-neon-cyan to-neon-violet text-black font-mono text-sm font-medium hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] hover:scale-105 transition-all duration-300">
                 <MessageSquare size={16} /> Contact Me
               </a>
-              <a href={site.resumeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-8 py-4 rounded-full border-2 border-neon-violet/50 text-white font-mono font-semibold text-sm hover:border-neon-violet hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:scale-105 transition-all duration-300">
+              <a href={site.resumeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-8 py-4 rounded-full border-2 border-neon-violet/50 text-white font-mono text-sm font-medium hover:border-neon-violet hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:scale-105 transition-all duration-300">
                 <FileText size={16} /> My Resume
               </a>
             </motion.div>

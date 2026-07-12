@@ -8,30 +8,10 @@ import { cn } from '@/lib/utils';
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
 const channels = [
-  {
-    icon: Mail,
-    label: 'EMAIL',
-    value: 'robelyinager12@gmail.com',
-    href: 'mailto:robelyinager12@gmail.com'
-  },
-  {
-    icon: Phone,
-    label: 'PHONE',
-    value: '+251 990 004 044',
-    href: 'tel:+251990004044'
-  },
-  {
-    icon: MapPin,
-    label: 'LOCATION',
-    value: 'Injibara, Ethiopia 🇪🇹',
-    href: null
-  },
-  {
-    icon: Clock,
-    label: 'RESPONSE TIME',
-    value: 'Within 24 hours',
-    href: null
-  }
+  { icon: Mail, label: 'EMAIL', value: 'robelyinager12@gmail.com', href: 'mailto:robelyinager12@gmail.com' },
+  { icon: Phone, label: 'PHONE', value: '+251 990 004 044', href: 'tel:+251990004044' },
+  { icon: MapPin, label: 'LOCATION', value: 'Injibara, Ethiopia 🇪🇹', href: null },
+  { icon: Clock, label: 'RESPONSE TIME', value: 'Within 24 hours', href: null }
 ];
 
 export function Contact() {
@@ -55,10 +35,21 @@ export function Contact() {
       if (!res.ok) throw new Error('Failed');
       setStatus('success');
       form.reset();
-    } catch {
-      setStatus('error');
-    }
+    } catch { setStatus('error'); }
   }
+
+  const inputStyle = {
+    width: '100%',
+    background: 'transparent',
+    border: 'none',
+    borderBottom: '1px solid rgba(255,255,255,0.12)',
+    paddingBottom: '12px',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '14px',
+    color: '#E2E8F0',
+    outline: 'none',
+    transition: 'border-color 0.2s'
+  };
 
   return (
     <section id="contact" className="relative py-24 overflow-hidden">
@@ -68,163 +59,141 @@ export function Contact() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
           <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 font-mono text-xs text-neon-cyan tracking-widest uppercase mb-6">
             GET IN TOUCH
           </span>
-          <h2 className="font-display font-bold text-[clamp(2.2rem,5vw,4rem)] leading-tight mb-4">
-            <span className="text-white">Let&apos;s build something </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-violet to-neon-pink">
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,5vw,3.8rem)', fontWeight: 600, lineHeight: 1.2, marginBottom: '16px' }}>
+            <span style={{ color: '#ffffff' }}>Let&apos;s build something </span>
+            <span style={{ background: 'linear-gradient(90deg, #8B5CF6, #EC4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               extraordinary
             </span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Have a project in mind? I&apos;d love to hear about it. Send me a
-            message and let&apos;s make it happen.
+          <p style={{ color: '#94A3B8', fontSize: '17px', maxWidth: '600px', margin: '0 auto', fontWeight: 400 }}>
+            Have a project in mind? I&apos;d love to hear about it. Send me a message and let&apos;s make it happen.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-6">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="rounded-2xl bg-[#0B1120]/80 border border-white/8 p-10"
-          >
-            <form onSubmit={handleSubmit} className="flex flex-col gap-12">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-5">
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} style={{ borderRadius: '16px', background: 'rgba(11,17,32,0.85)', border: '1px solid rgba(255,255,255,0.07)', padding: '48px' }}>
+            <form onSubmit={handleSubmit}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', marginBottom: '48px' }}>
                 <div>
                   <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
+                    id="name" name="name" type="text" required
                     placeholder="Full name"
-                    className="w-full bg-transparent border-b border-white/15 pb-3 font-mono text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-neon-cyan transition-colors duration-200"
+                    style={{ ...inputStyle }}
+                    onFocus={e => (e.target.style.borderBottomColor = '#00E5FF')}
+                    onBlur={e => (e.target.style.borderBottomColor = 'rgba(255,255,255,0.12)')}
                   />
                 </div>
                 <div>
                   <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
+                    id="email" name="email" type="email" required
                     placeholder="Email address"
-                    className="w-full bg-transparent border-b border-white/15 pb-3 font-mono text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-neon-cyan transition-colors duration-200"
+                    style={{ ...inputStyle }}
+                    onFocus={e => (e.target.style.borderBottomColor = '#00E5FF')}
+                    onBlur={e => (e.target.style.borderBottomColor = 'rgba(255,255,255,0.12)')}
                   />
                 </div>
               </div>
 
-              <div>
+              <div style={{ marginBottom: '48px' }}>
                 <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={6}
+                  id="message" name="message" required rows={6}
                   placeholder="Your message"
-                  className="w-full bg-transparent border-b border-white/15 pb-3 font-mono text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-neon-cyan transition-colors duration-200 resize-none"
+                  style={{ ...inputStyle, resize: 'none', display: 'block' }}
+                  onFocus={e => (e.target.style.borderBottomColor = '#00E5FF')}
+                  onBlur={e => (e.target.style.borderBottomColor = 'rgba(255,255,255,0.12)')}
                 />
               </div>
 
-              <div>
+              <div style={{ marginBottom: status !== 'idle' ? '24px' : '0' }}>
                 <motion.button
                   type="submit"
                   disabled={status === 'sending'}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
-                  className={cn(
-                    'flex items-center gap-3 px-10 py-4 rounded-full font-mono text-sm transition-all duration-300',
-                    'border border-neon-cyan/40 bg-transparent text-neon-cyan',
-                    'hover:bg-neon-cyan/10 hover:border-neon-cyan hover:shadow-[0_0_25px_rgba(0,229,255,0.25)]',
-                    'disabled:opacity-60 disabled:cursor-not-allowed'
-                  )}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '14px 36px',
+                    borderRadius: '50px',
+                    border: '1px solid rgba(0,229,255,0.35)',
+                    background: 'transparent',
+                    color: '#00E5FF',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLButtonElement).style.background = 'rgba(0,229,255,0.08)';
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(0,229,255,0.6)';
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 20px rgba(0,229,255,0.2)';
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(0,229,255,0.35)';
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow = 'none';
+                  }}
                 >
                   {status === 'sending' ? (
                     <>
-                      <span className="w-4 h-4 border-2 border-neon-cyan border-t-transparent rounded-full animate-spin" />
+                      <span style={{ width: '16px', height: '16px', border: '2px solid #00E5FF', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 1s linear infinite', display: 'inline-block' }} />
                       Sending...
                     </>
                   ) : (
                     <>
                       Send message
-                      <Send size={15} />
+                      <Send size={14} />
                     </>
                   )}
                 </motion.button>
               </div>
 
               {status === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-2 p-4 rounded-xl bg-green-400/10 border border-green-400/20 font-mono text-sm text-green-400"
-                >
-                  <CheckCircle size={16} />
-                  Message sent successfully. I will reply within 24 hours.
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '14px 18px', borderRadius: '12px', background: 'rgba(74,222,128,0.08)', border: '1px solid rgba(74,222,128,0.2)', fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#4ADE80' }}>
+                  <CheckCircle size={15} />
+                  Message sent! I will reply within 24 hours.
                 </motion.div>
               )}
               {status === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-2 p-4 rounded-xl bg-red-400/10 border border-red-400/20 font-mono text-sm text-red-400"
-                >
-                  <AlertCircle size={16} />
-                  Something went wrong. Email robelyinager12@gmail.com directly.
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '14px 18px', borderRadius: '12px', background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.2)', fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#F87171' }}>
+                  <AlertCircle size={15} />
+                  Failed. Email robelyinager12@gmail.com directly.
                 </motion.div>
               )}
             </form>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="rounded-2xl bg-[#0B1120]/80 border border-white/8 p-8 flex flex-col gap-2"
-          >
-            <h3 className="font-display font-semibold text-xl text-white mb-4">
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ borderRadius: '16px', background: 'rgba(11,17,32,0.85)', border: '1px solid rgba(255,255,255,0.07)', padding: '32px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '20px', color: '#ffffff', marginBottom: '20px' }}>
               Direct channels
             </h3>
 
-            <div className="flex flex-col gap-1">
-              {channels.map((ch, i) => {
-                const Icon = ch.icon;
-                const inner = (
-                  <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors duration-200 group">
-                    <div className="w-12 h-12 rounded-xl bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center flex-shrink-0 group-hover:bg-neon-cyan/20 transition-colors duration-200">
-                      <Icon size={20} className="text-neon-cyan" />
-                    </div>
-                    <div>
-                      <p className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-1">
-                        {ch.label}
-                      </p>
-                      <p className="font-mono text-sm text-white group-hover:text-neon-cyan transition-colors duration-200">
-                        {ch.value}
-                      </p>
-                    </div>
+            {channels.map((ch, i) => {
+              const Icon = ch.icon;
+              const inner = (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '14px 12px', borderRadius: '12px', transition: 'background 0.2s', cursor: ch.href ? 'pointer' : 'default' }} onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.04)'; }} onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = 'transparent'; }}>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Icon size={20} style={{ color: '#00E5FF' }} />
                   </div>
-                );
-                return ch.href ? (
-                  <a key={i} href={ch.href}>{inner}</a>
-                ) : (
-                  <div key={i}>{inner}</div>
-                );
-              })}
-            </div>
+                  <div>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#475569', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '4px' }}>{ch.label}</p>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', color: '#E2E8F0' }}>{ch.value}</p>
+                  </div>
+                </div>
+              );
+              return ch.href ? <a key={i} href={ch.href} style={{ textDecoration: 'none' }}>{inner}</a> : <div key={i}>{inner}</div>;
+            })}
 
-            <div className="mt-4 pt-4 border-t border-white/8">
-              <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-neon-cyan/20 bg-neon-cyan/5">
-                <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
-                <span className="font-mono text-sm text-neon-cyan font-medium">
-                  Available for freelance work
-                </span>
+            <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 16px', borderRadius: '10px', border: '1px solid rgba(0,229,255,0.15)', background: 'rgba(0,229,255,0.04)' }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#4ADE80', boxShadow: '0 0 8px rgba(74,222,128,0.6)', flexShrink: 0, animation: 'pulse 2s infinite' }} />
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#00E5FF' }}>Available for freelance work</span>
               </div>
             </div>
           </motion.div>
