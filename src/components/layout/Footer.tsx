@@ -28,76 +28,98 @@ const FacebookIcon = () => (
 );
 
 const socials = [
-  { icon: LinkedInIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/robel-yinager-943b37419/', color: '#0A66C2' },
-  { icon: TelegramIcon, label: 'Telegram', href: 'https://t.me/robaNew05', color: '#26A5E4' },
-  { icon: FacebookIcon, label: 'Facebook', href: '#', color: '#1877F2' },
-  { icon: GitHubIcon, label: 'GitHub', href: 'https://github.com/robelyinager12-web', color: '#E2E8F0' }
-];
-
-const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Contact', href: '#contact' }
+  { Icon: LinkedInIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/robel-yinager-943b37419/', color: '#0A66C2' },
+  { Icon: TelegramIcon, label: 'Telegram', href: 'https://t.me/robaNew05', color: '#26A5E4' },
+  { Icon: FacebookIcon, label: 'Facebook', href: '#', color: '#1877F2' },
+  { Icon: GitHubIcon, label: 'GitHub', href: 'https://github.com/robelyinager12-web', color: '#E2E8F0' }
 ];
 
 export function Footer() {
   return (
     <footer style={{ position: 'relative', overflow: 'hidden' }}>
-      <div style={{ height: '2px', background: 'linear-gradient(90deg,#00E5FF,#8B5CF6,#EC4899,#F59E0B,#10B981,#00E5FF)' }} />
+      <div style={{ height: '2px', background: 'linear-gradient(90deg,#00E5FF,#8B5CF6,#EC4899,#F59E0B,#10B981,#3B82F6,#00E5FF)' }} />
 
-      <div style={{ background: '#020610', paddingTop: '60px', paddingBottom: '40px', position: 'relative' }}>
+      <div style={{ background: '#020610', padding: '48px 0 32px', position: 'relative' }}>
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '500px', height: '200px', background: 'rgba(139,92,246,0.04)', borderRadius: '50%', filter: 'blur(80px)' }} />
-          {Array.from({length:15},(_,i)=>(
-            <div key={i} className="particle" style={{ left:(i*43+7)%100+'%', top:(i*67+12)%100+'%', width:(i%2+1)*3+'px', height:(i%2+1)*3+'px', background:i%3===0?'#00E5FF':i%3===1?'#8B5CF6':'#EC4899', opacity:0.2, animationDelay:i*0.3+'s', animationDuration:(3+i%3)+'s' }} />
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '600px', height: '180px', background: 'rgba(139,92,246,0.04)', borderRadius: '50%', filter: 'blur(80px)' }} />
+          {Array.from({ length: 15 }, (_, i) => (
+            <div key={i} className="particle" style={{ left: (i * 43 + 7) % 100 + '%', top: (i * 67 + 12) % 100 + '%', width: (i % 2 + 1) * 3 + 'px', height: (i % 2 + 1) * 3 + 'px', background: i % 3 === 0 ? '#00E5FF' : i % 3 === 1 ? '#8B5CF6' : '#EC4899', opacity: 0.2, animationDelay: i * 0.3 + 's', animationDuration: (3 + i % 3) + 's' }} />
           ))}
         </div>
 
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '28px' }}>
 
-            <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} style={{ display:'flex', alignItems:'center', gap:'16px', justifyContent:'center', flexWrap:'wrap' }}>
-              {socials.map(s => {
-                const Icon = s.icon;
-                return (
-                  <motion.a key={s.label} href={s.href} target={s.href.startsWith('http')?'_blank':undefined} rel="noopener noreferrer" whileHover={{ y:-5, scale:1.05 }} whileTap={{ scale:0.95 }} style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', textDecoration:'none' }}>
-                    <div style={{ width:'56px', height:'56px', borderRadius:'14px', background:'rgba(255,255,255,0.06)', display:'flex', alignItems:'center', justifyContent:'center', color: s.color, transition:'all 0.2s' }}
-                      onMouseEnter={e=>{ const d=e.currentTarget as HTMLDivElement; d.style.background=s.color+'22'; d.style.boxShadow=`0 0 20px ${s.color}44`; }}
-                      onMouseLeave={e=>{ const d=e.currentTarget as HTMLDivElement; d.style.background='rgba(255,255,255,0.06)'; d.style.boxShadow='none'; }}>
-                      <Icon />
-                    </div>
-                    <span style={{ fontFamily:'Inter', fontSize:'11px', fontWeight:400, color:'#64748B', letterSpacing:'0.05em' }}>{s.label}</span>
-                  </motion.a>
-                );
-              })}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{ display: 'flex', alignItems: 'center', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}
+            >
+              {socials.map(({ Icon, label, href, color }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -5, scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', textDecoration: 'none' }}
+                >
+                  <div
+                    style={{ width: '56px', height: '56px', borderRadius: '14px', background: 'rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: color, transition: 'all 0.25s' }}
+                    onMouseEnter={e => {
+                      const d = e.currentTarget as HTMLDivElement;
+                      d.style.background = color + '22';
+                      d.style.boxShadow = '0 0 20px ' + color + '55';
+                    }}
+                    onMouseLeave={e => {
+                      const d = e.currentTarget as HTMLDivElement;
+                      d.style.background = 'rgba(255,255,255,0.06)';
+                      d.style.boxShadow = 'none';
+                    }}
+                  >
+                    <Icon />
+                  </div>
+                  <span style={{ fontFamily: 'Inter', fontSize: '11px', fontWeight: 400, color: '#64748B', letterSpacing: '0.05em' }}>{label}</span>
+                </motion.a>
+              ))}
             </motion.div>
 
-            <div style={{ width:'100%', height:'1px', background:'linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent)' }} />
+            <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent)' }} />
 
-            <motion.div initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} style={{ display:'flex', flexWrap:'wrap', justifyContent:'space-between', alignItems:'center', width:'100%', gap:'16px' }}>
-              <p style={{ fontFamily:'Inter', fontSize:'13px', fontWeight:400, color:'#475569' }}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: '12px' }}
+            >
+              <p style={{ fontFamily: 'Inter', fontSize: '13px', fontWeight: 400, color: '#475569' }}>
                 © {new Date().getFullYear()} Robel Yinager. All rights reserved.
               </p>
-              <div style={{ display:'flex', alignItems:'center', gap:'24px', flexWrap:'wrap' }}>
-                {['Terms of Service','Privacy Policy','Accessibility'].map(item=>(
-                  <a key={item} href="#" style={{ fontFamily:'Inter', fontSize:'13px', fontWeight:400, color:'#475569', textDecoration:'none', transition:'color 0.2s' }}
-                    onMouseEnter={e=>(e.currentTarget as HTMLAnchorElement).style.color='#94A3B8'}
-                    onMouseLeave={e=>(e.currentTarget as HTMLAnchorElement).style.color='#475569'}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+                {['Terms of Service', 'Privacy Policy', 'Accessibility'].map(item => (
+                  <a key={item} href="#" style={{ fontFamily: 'Inter', fontSize: '13px', fontWeight: 400, color: '#475569', textDecoration: 'none', transition: 'color 0.2s' }}
+                    onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#94A3B8'}
+                    onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#475569'}>
                     {item}
                   </a>
                 ))}
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} style={{ display:'flex', alignItems:'center', gap:'10px' }}>
-              <span style={{ fontFamily:'Inter', fontSize:'13px', color:'#475569' }}>Designed & built by</span>
-              <div style={{ display:'flex', alignItems:'center', gap:'8px' }}>
-                <div style={{ width:'28px', height:'28px', borderRadius:'50%', overflow:'hidden', border:'1.5px solid rgba(139,92,246,0.4)', flexShrink:0 }}>
-                  <Image src="/avatar.jpg" alt="Robel" width={28} height={28} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'top' }} />
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
+            >
+              <span style={{ fontFamily: 'Inter', fontSize: '13px', color: '#475569' }}>Designed & built by</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '28px', height: '28px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '1.5px solid rgba(139,92,246,0.4)' }}>
+                  <Image src="/avatar.jpg" alt="Robel" width={28} height={28} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                 </div>
-                <span style={{ fontFamily:'Space Grotesk', fontSize:'14px', fontWeight:600, color:'#ffffff' }}>Robel Yinager</span>
+                <span style={{ fontFamily: 'Space Grotesk', fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>Robel Yinager</span>
               </div>
             </motion.div>
 
@@ -105,7 +127,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div style={{ height:'1px', background:'linear-gradient(90deg,#00E5FF,#8B5CF6,#EC4899,#F59E0B,#10B981,#00E5FF)', opacity:0.3 }} />
+      <div style={{ height: '1px', background: 'linear-gradient(90deg,#00E5FF,#8B5CF6,#EC4899,#F59E0B,#10B981,#3B82F6,#00E5FF)', opacity: 0.35 }} />
     </footer>
   );
 }

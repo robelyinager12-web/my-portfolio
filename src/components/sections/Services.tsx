@@ -2,19 +2,18 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
 
 const whyChooseMe = [
-  { icon: '⚡', title: 'Lightning Fast', desc: 'Performance-first development. Every project is optimized for Core Web Vitals, minimal bundle size, and sub-second load times from day one.', color: 'border-yellow-400/20 hover:border-yellow-400/40', iconBg: 'bg-yellow-400/10', bar: 'bg-yellow-400' },
-  { icon: '🔒', title: 'Security First', desc: 'JWT auth, input sanitization, rate limiting, CORS hardening — security is baked into every layer of the stack, never bolted on at the end.', color: 'border-neon-violet/20 hover:border-neon-violet/40', iconBg: 'bg-neon-violet/10', bar: 'bg-neon-violet' },
-  { icon: '📐', title: 'Clean Architecture', desc: 'Modular, documented, readable code. Built for teams, not just demos. Your future developers will thank you for choosing maintainable structure.', color: 'border-neon-pink/20 hover:border-neon-pink/40', iconBg: 'bg-neon-pink/10', bar: 'bg-neon-pink' },
-  { icon: '🤝', title: 'Transparent Process', desc: 'Weekly updates, staging previews, and open communication throughout. You are never left wondering what is happening with your project.', color: 'border-orange-400/20 hover:border-orange-400/40', iconBg: 'bg-orange-400/10', bar: 'bg-orange-400' },
-  { icon: '🚀', title: 'On-Time Delivery', desc: 'Deadlines are commitments. Milestone-based delivery keeps projects on track — if something changes, you are the first to know.', color: 'border-neon-cyan/20 hover:border-neon-cyan/40', iconBg: 'bg-neon-cyan/10', bar: 'bg-neon-cyan' },
-  { icon: '♾️', title: 'Long-Term Support', desc: 'Post-launch support available for every project. Bug fixes, feature additions, and performance audits — I am here long after go-live.', color: 'border-blue-400/20 hover:border-blue-400/40', iconBg: 'bg-blue-400/10', bar: 'bg-blue-400' }
+  { icon: '⚡', title: 'Lightning Fast', desc: 'Performance-first development. Every project is optimized for Core Web Vitals, minimal bundle size, and sub-second load times from day one.', color: '#F59E0B' },
+  { icon: '🔒', title: 'Security First', desc: 'JWT auth, input sanitization, rate limiting, CORS hardening — security is baked into every layer of the stack, never bolted on at the end.', color: '#8B5CF6' },
+  { icon: '📐', title: 'Clean Architecture', desc: 'Modular, documented, readable code. Built for teams, not just demos. Your future developers will thank you for choosing maintainable structure.', color: '#EC4899' },
+  { icon: '🤝', title: 'Transparent Process', desc: 'Weekly updates, staging previews, and open communication throughout. You are never left wondering what is happening with your project.', color: '#F97316' },
+  { icon: '🚀', title: 'On-Time Delivery', desc: 'Deadlines are commitments. Milestone-based delivery keeps projects on track — if something changes, you are the first to know.', color: '#00E5FF' },
+  { icon: '♾️', title: 'Long-Term Support', desc: 'Post-launch support available for every project. Bug fixes, feature additions, and performance audits — I am here long after go-live.', color: '#3B82F6' }
 ];
 
 const coreCapabilities = [
-  { num: 'I', title: 'Optimized Workflow', desc: 'My development experience is powered by modern tooling — VS Code extensions like Emmet, IntelliCode, and Prettier keep my code clean, fast, and maintainable.', cat: 'DevOps' },
+  { num: 'I', title: 'Optimized Workflow', desc: 'My development experience is powered by modern tooling — VS Code extensions like Emmet, IntelliCode, and Prettier keep code clean, fast, and maintainable.', cat: 'DevOps' },
   { num: 'II', title: 'Integrated Interfaces', desc: 'I create seamless connections between user interfaces and backend systems, enabling smooth, secure data exchange from dynamic form handling to custom API paths.', cat: 'Full Stack' },
   { num: 'III', title: 'Client-Centric Delivery', desc: 'Every project is delivered with precision and purpose — on time, completely aligned with your targets, and built to leave a lasting modern impression.', cat: 'Delivery' },
   { num: 'IV', title: 'Developer-Centric', desc: 'Built for uptime and impact: backend systems running on structured code with an emphasis on rock-solid reliability that builds user confidence.', cat: 'Backend' },
@@ -25,101 +24,92 @@ const coreCapabilities = [
   { num: 'IX', title: 'Full-Stack Integration', desc: 'Connecting secure databases, robust server layers, and interactive front-ends into one unified application package designed for high-velocity user scaling.', cat: 'Full Stack' }
 ];
 
-const filterTabs = ['All', 'Frontend', 'Backend', 'Full Stack', 'UI/UX', 'DevOps', 'Delivery'];
+const filterTabs = ['All', 'Frontend', 'Backend', 'Full Stack', 'DevOps', 'Delivery'];
 
 export function Services() {
   const [activeFilter, setActiveFilter] = useState('All');
-
-  const filtered = activeFilter === 'All'
-    ? coreCapabilities
-    : coreCapabilities.filter(c => c.cat === activeFilter);
+  const filtered = activeFilter === 'All' ? coreCapabilities : coreCapabilities.filter(c => c.cat === activeFilter);
 
   return (
-    <section id="services" className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-neon-cyan/4 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-neon-pink/4 rounded-full blur-[150px]" />
-      </div>
+    <section id="services" style={{ position: 'relative', padding: '96px 0', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 0% 50%,rgba(0,229,255,0.04) 0%,transparent 60%),radial-gradient(ellipse at 100% 50%,rgba(236,72,153,0.04) 0%,transparent 60%)', pointerEvents: 'none' }} />
 
-      <div className="max-w-7xl mx-auto px-6 space-y-28">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
 
-        <div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 font-mono text-xs text-neon-cyan tracking-widest uppercase mb-6">
-              ✦ WHAT I OFFER
-            </span>
-            <h2 className="font-display font-black text-[clamp(2.5rem,6vw,4.5rem)] leading-tight mb-4">
-              <span className="text-white">My </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-violet to-neon-cyan">Services</span>
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">End-to-end digital solutions engineered with precision, creativity, and relentless attention to performance.</p>
-            <div className="flex flex-wrap items-center justify-center gap-6 mt-8 px-6 py-4 rounded-2xl bg-white/3  max-w-2xl mx-auto">
-              <span className="flex items-center gap-2 font-mono text-sm text-yellow-400"><span>⚡</span> Fast Delivery</span>
-              <span className="text-white/20">|</span>
-              <span className="flex items-center gap-2 font-mono text-sm text-neon-violet"><span>🔒</span> Secure by Default</span>
-              <span className="text-white/20">|</span>
-              <span className="flex items-center gap-2 font-mono text-sm text-neon-cyan"><span>📐</span> Clean Architecture</span>
-              <span className="text-white/20">|</span>
-              <span className="flex items-center gap-2 font-mono text-sm text-orange-400"><span>🤝</span> Full Ownership Transfer</span>
-            </div>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-yellow-400/30 bg-yellow-400/5 font-mono text-xs text-yellow-400 tracking-widest uppercase mb-6">
-              🏆 WHY CHOOSE ME
-            </span>
-            <h3 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-tight text-white mb-3">
-              Built Different. <span className="text-neon-cyan">Delivered Better.</span>
-            </h3>
-            <p className="text-gray-400 max-w-xl mx-auto">Six commitments I bring to every single project — no exceptions, no excuses.</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {whyChooseMe.map((item, i) => (
-              <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }} className={cn('p-6 rounded-2xl bg-white/3 border transition-all duration-300 group', item.color)} whileHover={{ y: -6 }}>
-                <div className={cn('w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5', item.iconBg)}>
-                  {item.icon}
-                </div>
-                <h4 className="font-display font-bold text-lg text-white mb-3 group-hover:text-neon-cyan transition-colors duration-300">{item.title}</h4>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">{item.desc}</p>
-                <div className={cn('h-0.5 w-8 rounded-full', item.bar)} />
-              </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 18px', borderRadius: '50px', background: 'rgba(0,229,255,0.06)', fontFamily: 'Inter', fontSize: '11px', color: '#00E5FF', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '20px' }}>✦ WHAT I OFFER</span>
+          <h2 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(2.2rem,5vw,3.8rem)', fontWeight: 600, lineHeight: 1.15, marginBottom: '16px' }}>
+            <span style={{ color: '#ffffff' }}>My </span>
+            <span style={{ background: 'linear-gradient(90deg,#8B5CF6,#00E5FF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Services</span>
+          </h2>
+          <p style={{ color: '#64748B', fontSize: '16px', maxWidth: '560px', margin: '0 auto 28px', lineHeight: 1.6 }}>End-to-end digital solutions engineered with precision, creativity, and relentless attention to performance.</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '20px', padding: '14px 28px', borderRadius: '50px', background: 'rgba(255,255,255,0.03)', maxWidth: 'fit-content', margin: '0 auto' }}>
+            {[['⚡','Fast Delivery','#F59E0B'],['🔒','Secure by Default','#8B5CF6'],['📐','Clean Architecture','#00E5FF'],['🤝','Full Ownership Transfer','#EC4899']].map(([icon,text,color])=>(
+              <span key={text as string} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'Inter', fontSize: '13px', color: color as string }}><span>{icon}</span>{text}</span>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h3 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-tight mb-4">
-              <span className="text-white">Core </span>
-              <span className="text-neon-cyan">Capabilities</span>
-            </h3>
-            <p className="text-gray-400 max-w-xl mx-auto mb-8">Nine pillars of excellence. Click any card to explore full details.</p>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {filterTabs.map(tab => (
-                <button key={tab} onClick={() => setActiveFilter(tab)} className={cn('px-4 py-2 rounded-full font-mono text-sm transition-all duration-200', activeFilter === tab ? 'bg-gradient-to-r from-neon-cyan to-neon-violet text-black font-bold shadow-[0_0_15px_rgba(0,255,255,0.3)]' : 'bg-white/5  text-gray-400 hover:text-white hover:border-white/20')}>
-                  {tab}
-                </button>
-              ))}
-            </div>
-          </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 18px', borderRadius: '50px', background: 'rgba(245,158,11,0.06)', fontFamily: 'Inter', fontSize: '11px', color: '#F59E0B', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '20px' }}>🏆 WHY CHOOSE ME</span>
+          <h3 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(1.8rem,4vw,3rem)', fontWeight: 600, color: '#ffffff', marginBottom: '12px' }}>
+            Built Different. <span style={{ color: '#00E5FF' }}>Delivered Better.</span>
+          </h3>
+          <p style={{ color: '#64748B', fontSize: '15px', maxWidth: '480px', margin: '0 auto' }}>Six commitments I bring to every single project — no exceptions, no excuses.</p>
+        </motion.div>
 
-          <AnimatePresence mode="wait">
-            <motion.div key={activeFilter} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filtered.map((item, i) => (
-                <motion.div key={item.num} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.06 }} className="p-6 rounded-2xl bg-white/3  hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300 group" whileHover={{ y: -4 }}>
-                  <div className="text-4xl font-display font-black text-neon-cyan mb-4 opacity-60">{item.num}</div>
-                  <h4 className="font-display font-bold text-lg text-white mb-3 group-hover:text-neon-cyan transition-colors duration-300">{item.title}</h4>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-5">{item.desc}</p>
-                  <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-neon-cyan/30 font-mono text-xs text-neon-cyan hover:bg-neon-cyan/10 transition-all duration-200">
-                    Read more →
-                  </button>
-                </motion.div>
-              ))}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '16px', marginBottom: '80px' }}>
+          {whyChooseMe.map((item, i) => (
+            <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} whileHover={{ y: -6 }} style={{ position: 'relative', padding: '28px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', overflow: 'hidden', cursor: 'default', transition: 'all 0.3s' }}
+              onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.05)'; d.style.boxShadow = '0 0 30px ' + item.color + '15'; }}
+              onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.03)'; d.style.boxShadow = 'none'; }}>
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '0', background: 'linear-gradient(to top,' + item.color + '12,transparent)', transition: 'height 0.4s ease' }}
+                onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.height = '100%'}
+                onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.height = '0'} />
+              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: item.color + '15', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', marginBottom: '16px' }}>{item.icon}</div>
+              <h4 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '17px', color: '#ffffff', marginBottom: '10px' }}>{item.title}</h4>
+              <p style={{ fontFamily: 'Inter', fontSize: '14px', color: '#64748B', lineHeight: 1.65, marginBottom: '16px' }}>{item.desc}</p>
+              <div style={{ height: '2px', width: '32px', borderRadius: '2px', background: item.color }} />
             </motion.div>
-          </AnimatePresence>
+          ))}
         </div>
 
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <h3 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(1.8rem,4vw,3rem)', fontWeight: 600, marginBottom: '12px' }}>
+            <span style={{ color: '#ffffff' }}>Core </span>
+            <span style={{ color: '#00E5FF' }}>Capabilities</span>
+          </h3>
+          <p style={{ color: '#64748B', fontSize: '15px', maxWidth: '480px', margin: '0 auto 24px' }}>Nine pillars of excellence. Click any card to explore full details.</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
+            {filterTabs.map(tab => (
+              <button key={tab} onClick={() => setActiveFilter(tab)} style={{ padding: '8px 18px', borderRadius: '50px', border: 'none', fontFamily: 'Inter', fontSize: '13px', cursor: 'pointer', transition: 'all 0.2s', background: activeFilter === tab ? 'linear-gradient(90deg,#00E5FF,#8B5CF6)' : 'rgba(255,255,255,0.05)', color: activeFilter === tab ? '#000000' : '#94A3B8', fontWeight: activeFilter === tab ? 600 : 400 }}>
+                {tab}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          <motion.div key={activeFilter} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '16px' }}>
+            {filtered.map((item, i) => (
+              <motion.div key={item.num} initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.05 }} whileHover={{ y: -6 }} style={{ position: 'relative', padding: '28px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', overflow: 'hidden', cursor: 'default', transition: 'all 0.3s' }}
+                onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.05)'; d.style.boxShadow = '0 0 25px rgba(0,229,255,0.1)'; }}
+                onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.03)'; d.style.boxShadow = 'none'; }}>
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '0', background: 'linear-gradient(to top,rgba(0,229,255,0.08),transparent)', transition: 'height 0.4s ease' }}
+                  onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.height = '100%'}
+                  onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.height = '0'} />
+                <div style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: '40px', color: '#00E5FF', opacity: 0.25, marginBottom: '16px', lineHeight: 1 }}>{item.num}</div>
+                <h4 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '17px', color: '#ffffff', marginBottom: '10px' }}>{item.title}</h4>
+                <p style={{ fontFamily: 'Inter', fontSize: '14px', color: '#64748B', lineHeight: 1.65, marginBottom: '20px' }}>{item.desc}</p>
+                <button style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 16px', borderRadius: '50px', border: '1px solid rgba(0,229,255,0.2)', background: 'transparent', color: '#00E5FF', fontFamily: 'Inter', fontSize: '12px', cursor: 'pointer', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { const b = e.currentTarget as HTMLButtonElement; b.style.background = 'rgba(0,229,255,0.08)'; b.style.borderColor = 'rgba(0,229,255,0.4)'; }}
+                  onMouseLeave={e => { const b = e.currentTarget as HTMLButtonElement; b.style.background = 'transparent'; b.style.borderColor = 'rgba(0,229,255,0.2)'; }}>
+                  Read more →
+                </button>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

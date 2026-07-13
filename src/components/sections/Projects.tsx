@@ -3,195 +3,94 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, Star, GitFork, Eye } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 const projects = [
-  {
-    title: 'Hospital Management System',
-    category: 'FULL STACK',
-    desc: 'A comprehensive healthcare platform streamlining patient records, appointments, billing, and hospital operations.',
-    tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Prisma'],
-    stars: 24, forks: 8, views: '3.4K',
-    github: '#', live: '#',
-    gradient: 'from-cyan-500/20 to-blue-600/20',
-    border: 'border-cyan-500/20 hover:border-cyan-400/50'
-  },
-  {
-    title: 'E-Commerce Platform',
-    category: 'FRONTEND',
-    desc: 'A scalable online marketplace with secure authentication, Stripe payment integration, and real-time inventory.',
-    tags: ['React', 'Express', 'MongoDB', 'Stripe'],
-    stars: 18, forks: 5, views: '2.7K',
-    github: '#', live: '#',
-    gradient: 'from-violet-500/20 to-purple-600/20',
-    border: 'border-violet-500/20 hover:border-violet-400/50'
-  },
-  {
-    title: 'Learning Management System',
-    category: 'UI/UX',
-    desc: 'An educational platform supporting course creation, assessments, progress tracking and instructor dashboards.',
-    tags: ['Next.js', 'TypeScript', 'MongoDB', 'AWS S3'],
-    stars: 11, forks: 3, views: '1.9K',
-    github: '#', live: '#',
-    gradient: 'from-pink-500/20 to-rose-600/20',
-    border: 'border-pink-500/20 hover:border-pink-400/50'
-  },
-  {
-    title: 'Instagram Clone',
-    category: 'FULL STACK',
-    desc: 'A fully featured social media platform with real-time messaging, photo sharing and story features.',
-    tags: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
-    stars: 31, forks: 12, views: '4.1K',
-    github: '#', live: '#',
-    gradient: 'from-orange-500/20 to-pink-600/20',
-    border: 'border-orange-500/20 hover:border-orange-400/50'
-  },
-  {
-    title: 'Real-Time Chat App',
-    category: 'WEBRTC',
-    desc: 'A WebRTC-powered video and text chat application with rooms, screen sharing and end-to-end encryption.',
-    tags: ['React', 'WebRTC', 'Socket.io', 'Node.js'],
-    stars: 15, forks: 6, views: '2.2K',
-    github: '#', live: '#',
-    gradient: 'from-green-500/20 to-teal-600/20',
-    border: 'border-green-500/20 hover:border-green-400/50'
-  },
-  {
-    title: '3D Data Visualizer',
-    category: 'API INTEGRATION',
-    desc: 'An interactive WebGL dashboard mapping live metrics onto a navigable 3D scene using Three.js.',
-    tags: ['Three.js', 'React', 'Node.js', 'MySQL'],
-    stars: 9, forks: 2, views: '1.5K',
-    github: '#', live: '#',
-    gradient: 'from-yellow-500/20 to-orange-600/20',
-    border: 'border-yellow-500/20 hover:border-yellow-400/50'
-  }
+  { title: 'Hospital Management System', category: 'FULL STACK', desc: 'A comprehensive healthcare platform streamlining patient records, appointments, billing, and hospital operations.', tags: ['Next.js','Node.js','PostgreSQL','Prisma'], stars: 24, forks: 8, views: '3.4K', github: '#', live: '#', accent: '#00E5FF' },
+  { title: 'E-Commerce Platform', category: 'FRONTEND', desc: 'A scalable online marketplace with secure authentication, Stripe payment integration, and real-time inventory.', tags: ['React','Express','MongoDB','Stripe'], stars: 18, forks: 5, views: '2.7K', github: '#', live: '#', accent: '#8B5CF6' },
+  { title: 'Learning Management System', category: 'UI/UX', desc: 'An educational platform supporting course creation, assessments, progress tracking and instructor dashboards.', tags: ['Next.js','TypeScript','MongoDB','AWS S3'], stars: 11, forks: 3, views: '1.9K', github: '#', live: '#', accent: '#EC4899' },
+  { title: 'Instagram Clone', category: 'FULL STACK', desc: 'A fully featured social media platform with real-time messaging, photo sharing and story features.', tags: ['React','Node.js','MongoDB','Socket.io'], stars: 31, forks: 12, views: '4.1K', github: '#', live: '#', accent: '#F59E0B' },
+  { title: 'Real-Time Chat App', category: 'WEBRTC', desc: 'A WebRTC-powered video and text chat application with rooms, screen sharing and end-to-end encryption.', tags: ['React','WebRTC','Socket.io','Node.js'], stars: 15, forks: 6, views: '2.2K', github: '#', live: '#', accent: '#10B981' },
+  { title: '3D Data Visualizer', category: 'API INTEGRATION', desc: 'An interactive WebGL dashboard mapping live metrics onto a navigable 3D scene using Three.js.', tags: ['Three.js','React','Node.js','MySQL'], stars: 9, forks: 2, views: '1.5K', github: '#', live: '#', accent: '#F97316' }
 ];
-
-const catColors: Record<string, string> = {
-  'FULL STACK': 'bg-neon-cyan/10 text-neon-cyan border-neon-cyan/20',
-  'FRONTEND': 'bg-neon-violet/10 text-neon-violet border-neon-violet/20',
-  'UI/UX': 'bg-neon-pink/10 text-neon-pink border-neon-pink/20',
-  'WEBRTC': 'bg-green-400/10 text-green-400 border-green-400/20',
-  'API INTEGRATION': 'bg-yellow-400/10 text-yellow-400 border-yellow-400/20'
-};
 
 export function Projects() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section id="portfolio" className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/3 w-96 h-96 bg-neon-violet/5 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-neon-cyan/5 rounded-full blur-[150px]" />
-      </div>
+    <section id="portfolio" style={{ position: 'relative', padding: '96px 0', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 30% 0%,rgba(139,92,246,0.06) 0%,transparent 60%)', pointerEvents: 'none' }} />
 
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-6">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 font-mono text-xs text-neon-cyan tracking-widest uppercase mb-6">
-            • PORTFOLIO SHOWCASE
-          </span>
-          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,4.5rem)] leading-tight mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink via-neon-violet to-yellow-400">My Latest </span>
-            <span className="text-white">Work</span>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 18px', borderRadius: '50px', background: 'rgba(0,229,255,0.06)', fontFamily: 'Inter', fontSize: '11px', color: '#00E5FF', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '20px' }}>• PORTFOLIO SHOWCASE</span>
+          <h2 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(2.2rem,5vw,3.8rem)', fontWeight: 600, lineHeight: 1.15, marginBottom: '12px' }}>
+            <span style={{ background: 'linear-gradient(90deg,#EC4899,#8B5CF6,#F59E0B)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>My Latest </span>
+            <span style={{ color: '#ffffff' }}>Work</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-neon-cyan to-neon-pink rounded-full mx-auto mb-6" />
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">A curated collection of full-stack applications, UI experiments, and real-time systems built with passion and precision.</p>
+          <div style={{ width: '80px', height: '3px', background: 'linear-gradient(90deg,#00E5FF,#EC4899)', borderRadius: '2px', margin: '0 auto 16px' }} />
+          <p style={{ color: '#64748B', fontSize: '15px', maxWidth: '520px', margin: '0 auto 28px', lineHeight: 1.6 }}>A curated collection of full-stack applications, UI experiments, and real-time systems built with passion and precision.</p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="flex items-center justify-center gap-8 py-4 px-8 rounded-2xl bg-white/3  max-w-lg mx-auto mb-14">
-          {[
-            { value: '20+', label: 'PROJECTS', color: 'text-neon-cyan' },
-            { value: '15+', label: 'TECHNOLOGIES', color: 'text-neon-violet' },
-            { value: '3yrs', label: 'EXPERIENCE', color: 'text-neon-pink' },
-            { value: '100%', label: 'PASSION', color: 'text-yellow-400' }
-          ].map((stat, i) => (
-            <div key={stat.label} className={cn('text-center', i < 3 && 'border-r border-white/10 pr-8')}>
-              <div className={cn('font-display font-black text-xl', stat.color)}>{stat.value}</div>
-              <div className="font-mono text-[10px] text-gray-500 tracking-widest uppercase mt-0.5">{stat.label}</div>
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px', padding: '14px 32px', borderRadius: '50px', background: 'rgba(255,255,255,0.03)', maxWidth: 'fit-content', margin: '0 auto 56px', flexWrap: 'wrap' }}>
+          {[['20+','PROJECTS','#00E5FF'],['15+','TECHNOLOGIES','#8B5CF6'],['2+yrs','EXPERIENCE','#EC4899'],['100%','PASSION','#F59E0B']].map(([v,l,c])=>(
+            <div key={l as string} style={{ textAlign: 'center' }}>
+              <div style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '20px', color: c as string }}>{v}</div>
+              <div style={{ fontFamily: 'Inter', fontSize: '10px', color: '#475569', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{l}</div>
             </div>
           ))}
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '20px' }}>
           {projects.map((project, i) => (
-            <motion.article
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              onHoverStart={() => setHovered(i)}
-              onHoverEnd={() => setHovered(null)}
-              className={cn('relative rounded-2xl overflow-hidden border bg-white/3 transition-all duration-300 group', project.border)}
-              whileHover={{ y: -8 }}
-            >
-              <div className={cn('relative h-52 overflow-hidden bg-gradient-to-br', project.gradient)}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="grid grid-cols-3 gap-2 opacity-20">
-                    {[...Array(9)].map((_, j) => (
-                      <div key={j} className="w-8 h-8 rounded-lg bg-white/20" />
-                    ))}
-                  </div>
+            <motion.article key={project.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }} whileHover={{ y: -8 }} onHoverStart={() => setHovered(i)} onHoverEnd={() => setHovered(null)} style={{ position: 'relative', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', overflow: 'hidden', cursor: 'pointer', transition: 'all 0.3s' }}
+              onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.boxShadow = '0 0 30px ' + project.accent + '20'; d.style.background = 'rgba(255,255,255,0.05)'; }}
+              onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.boxShadow = 'none'; d.style.background = 'rgba(255,255,255,0.03)'; }}>
+
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '0', background: 'linear-gradient(to top,' + project.accent + '12,transparent)', transition: 'height 0.5s ease', zIndex: 0 }}
+                ref={el => { if (el) { const parent = el.parentElement; if (parent) { parent.addEventListener('mouseenter', () => { el.style.height = '100%'; }); parent.addEventListener('mouseleave', () => { el.style.height = '0'; }); } } }} />
+
+              <div style={{ position: 'relative', height: '180px', background: 'linear-gradient(135deg,rgba(11,17,32,0.9),rgba(20,10,40,0.9))', overflow: 'hidden', zIndex: 1 }}>
+                <svg viewBox="0 0 300 180" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.4 }}>
+                  <polygon points="40,20 120,40 90,110 20,90" fill="none" stroke={project.accent} strokeWidth="1" />
+                  <polygon points="160,15 260,40 230,130 140,110" fill="none" stroke={project.accent} strokeWidth="0.8" opacity="0.6" />
+                  <circle cx="240" cy="140" r="30" fill="none" stroke={project.accent} strokeWidth="0.6" opacity="0.4" />
+                </svg>
+                <div style={{ position: 'absolute', top: '12px', right: '12px' }}>
+                  <span style={{ padding: '4px 10px', borderRadius: '50px', background: project.accent + '22', fontFamily: 'Inter', fontSize: '10px', fontWeight: 600, color: project.accent, letterSpacing: '0.08em' }}>{project.category}</span>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-[#050816]/40 to-transparent" />
-                <div className="absolute top-3 right-3">
-                  <span className={cn('px-3 py-1 rounded-full font-mono font-bold text-[10px] border uppercase tracking-widest', catColors[project.category] || 'bg-white/10 text-white border-white/20')}>
-                    {project.category}
-                  </span>
-                </div>
-                <div className="absolute bottom-3 left-4">
-                  <span className="font-mono text-[10px] text-white/40 tracking-widest">{'// ' + project.category}</span>
+                <div style={{ position: 'absolute', bottom: '10px', left: '14px' }}>
+                  <span style={{ fontFamily: 'Inter', fontSize: '10px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em' }}>// {project.category}</span>
                 </div>
                 <AnimatePresence>
                   {hovered === i && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/60 flex items-center justify-center gap-4">
-                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-neon-cyan/20 hover:border-neon-cyan/50 transition-all duration-200">
-                        <Github size={20} className="text-white" />
-                      </a>
-                      <a href={project.live} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-neon-pink/20 hover:border-neon-pink/50 transition-all duration-200">
-                        <ExternalLink size={20} className="text-white" />
-                      </a>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'absolute', inset: 0, background: 'rgba(5,8,22,0.65)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
+                      <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'rgba(0,229,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: '#00E5FF', transition: 'all 0.2s' }}><Github size={18} /></a>
+                      <a href={project.live} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'rgba(236,72,153,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: '#EC4899', transition: 'all 0.2s' }}><ExternalLink size={18} /></a>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
 
-              <div className="p-5">
-                <div className="mb-1">
-                  <span className="font-mono text-[10px] text-gray-500 tracking-widest">{'// ' + project.category}</span>
+              <div style={{ padding: '20px', position: 'relative', zIndex: 1 }}>
+                <div style={{ fontFamily: 'Inter', fontSize: '10px', color: '#475569', letterSpacing: '0.1em', marginBottom: '4px' }}>// {project.category}</div>
+                <h3 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '17px', color: '#ffffff', marginBottom: '10px', lineHeight: 1.3 }}>{project.title}</h3>
+                <div style={{ display: 'flex', gap: '16px', marginBottom: '10px' }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontFamily: 'Inter', fontSize: '12px', color: '#475569' }}><Star size={11} style={{ color: '#F59E0B' }} />{project.stars}</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontFamily: 'Inter', fontSize: '12px', color: '#475569' }}><GitFork size={11} style={{ color: '#00E5FF' }} />{project.forks}</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontFamily: 'Inter', fontSize: '12px', color: '#475569' }}><Eye size={11} style={{ color: '#8B5CF6' }} />{project.views}</span>
                 </div>
-                <h3 className="font-display font-bold text-lg text-white mb-2 group-hover:text-neon-cyan transition-colors duration-300">{project.title}</h3>
-                <div className="flex items-center gap-4 mb-3">
-                  <span className="flex items-center gap-1 font-mono text-xs text-gray-500"><Star size={11} className="text-yellow-400" /> {project.stars}</span>
-                  <span className="flex items-center gap-1 font-mono text-xs text-gray-500"><GitFork size={11} className="text-neon-cyan" /> {project.forks}</span>
-                  <span className="flex items-center gap-1 font-mono text-xs text-gray-500"><Eye size={11} className="text-neon-violet" /> {project.views}</span>
+                <p style={{ fontFamily: 'Inter', fontSize: '13px', color: '#64748B', lineHeight: 1.6, marginBottom: '14px' }}>{project.desc}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
+                  {project.tags.map(tag => <span key={tag} style={{ padding: '3px 10px', borderRadius: '50px', background: 'rgba(255,255,255,0.04)', fontFamily: 'Inter', fontSize: '11px', color: '#64748B' }}>{tag}</span>)}
                 </div>
-                <p className="text-gray-400 text-xs leading-relaxed mb-4">{project.desc}</p>
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="px-2 py-0.5 rounded-full bg-white/5  font-mono text-[10px] text-gray-400">{tag}</span>
-                  ))}
-                </div>
-                <div className="flex items-center justify-center gap-3 pt-3 ">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 rounded-full bg-neon-cyan/10 border border-neon-cyan/20 hover:bg-neon-cyan/20 hover:border-neon-cyan/50 transition-all duration-200">
-                    <Github size={16} className="text-neon-cyan" />
-                  </a>
-                  <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 rounded-full bg-neon-pink/10 border border-neon-pink/20 hover:bg-neon-pink/20 hover:border-neon-pink/50 transition-all duration-200">
-                    <ExternalLink size={16} className="text-neon-pink" />
-                  </a>
+                <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(0,229,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: '#00E5FF', transition: 'all 0.2s' }}><Github size={16} /></a>
+                  <a href={project.live} target="_blank" rel="noopener noreferrer" style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(236,72,153,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: '#EC4899', transition: 'all 0.2s' }}><ExternalLink size={16} /></a>
                 </div>
               </div>
             </motion.article>
           ))}
         </div>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-center mt-12">
-          <a href="https://github.com/robelyinager12-web" target="_blank" rel="noopener noreferrer" className={cn('inline-flex items-center gap-2 px-8 py-4 rounded-full', 'border-2 border-white/20 bg-transparent', 'font-mono font-bold text-white text-sm', 'hover:border-neon-cyan/60 hover:text-neon-cyan', 'hover:shadow-[0_0_20px_rgba(0,255,255,0.2)]', 'transition-all duration-300')}>
-            <Github size={18} />
-            View All Projects on GitHub →
-          </a>
-        </motion.div>
       </div>
     </section>
   );
