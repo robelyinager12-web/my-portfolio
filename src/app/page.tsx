@@ -7,6 +7,7 @@ import { Skills } from '@/components/sections/Skills';
 import { Services } from '@/components/sections/Services';
 import { Tools } from '@/components/sections/Tools';
 import { Projects } from '@/components/sections/Projects';
+import { Guarantees } from '@/components/sections/Guarantees';
 import { Process } from '@/components/sections/Process';
 import { Pricing } from '@/components/sections/Pricing';
 import { FAQ } from '@/components/sections/FAQ';
@@ -17,13 +18,14 @@ export default function Page() {
     <>
       <GlobeBackground />
       <Navbar />
-      <main className="relative z-[1]">
+      <main style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
         <About />
         <Skills />
         <Services />
         <Tools />
         <Projects />
+        <Guarantees />
         <Process />
         <Pricing />
         <FAQ />

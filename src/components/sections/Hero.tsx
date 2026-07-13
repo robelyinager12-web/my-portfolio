@@ -19,33 +19,15 @@ const techStack = [
 ];
 
 function ParticleBackground() {
-  const particles = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    left: (i * 37 + 10) % 100,
-    top: (i * 53 + 5) % 100,
-    size: (i % 3) + 1.5,
-    duration: (i % 3) + 3,
-    delay: (i * 0.2) % 4,
+  const particles = Array.from({ length: 45 }, (_, i) => ({
+    id: i, left: (i * 37 + 10) % 100, top: (i * 53 + 5) % 100,
+    size: (i % 3) + 1.5, duration: (i % 3) + 3, delay: (i * 0.2) % 4,
     color: i % 3 === 0 ? '#00E5FF' : i % 3 === 1 ? '#8B5CF6' : '#EC4899'
   }));
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
       {particles.map(p => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full"
-          style={{
-            left: p.left + '%',
-            top: p.top + '%',
-            width: p.size + 'px',
-            height: p.size + 'px',
-            background: p.color,
-            boxShadow: `0 0 ${p.size * 4}px ${p.color}`,
-            opacity: 0.5
-          }}
-          animate={{ y: [0, -25, 0], opacity: [0.2, 0.7, 0.2] }}
-          transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }}
-        />
+        <motion.div key={p.id} style={{ position: 'absolute', borderRadius: '50%', left: p.left + '%', top: p.top + '%', width: p.size + 'px', height: p.size + 'px', background: p.color, boxShadow: '0 0 ' + p.size * 4 + 'px ' + p.color, opacity: 0.45 }} animate={{ y: [0, -22, 0], opacity: [0.2, 0.65, 0.2] }} transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }} />
       ))}
     </div>
   );
@@ -59,47 +41,41 @@ function ParallaxPhoto() {
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), { stiffness: 150, damping: 20 });
   const moveX = useSpring(useTransform(x, [-0.5, 0.5], [-12, 12]), { stiffness: 150, damping: 20 });
   const moveY = useSpring(useTransform(y, [-0.5, 0.5], [-12, 12]), { stiffness: 150, damping: 20 });
-
-  function handleMouse(e: React.MouseEvent<HTMLDivElement>) {
+  function onMove(e: React.MouseEvent<HTMLDivElement>) {
     if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
+    const r = ref.current.getBoundingClientRect();
+    x.set((e.clientX - r.left) / r.width - 0.5);
+    y.set((e.clientY - r.top) / r.height - 0.5);
   }
-  function handleLeave() { x.set(0); y.set(0); }
-
   return (
-    <div ref={ref} onMouseMove={handleMouse} onMouseLeave={handleLeave} className="relative flex items-center justify-center cursor-none" style={{ perspective: '1000px' }}>
-      <div className="absolute w-[340px] h-[340px] md:w-[420px] md:h-[420px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.25) 0%, rgba(236,72,153,0.1) 50%, transparent 70%)' }} />
-      <motion.div style={{ rotateX, rotateY, x: moveX, y: moveY }} className="relative w-[260px] h-[260px] md:w-[320px] md:h-[320px] lg:w-[360px] lg:h-[360px]">
-        <motion.div className="absolute inset-0 rounded-full" style={{ background: 'conic-gradient(from 0deg, #00E5FF 0%, #8B5CF6 25%, #EC4899 50%, #8B5CF6 75%, #00E5FF 100%)', padding: '3px', borderRadius: '50%' }} animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}>
-          <div className="w-full h-full rounded-full bg-[#050816]" />
+    <div ref={ref} onMouseMove={onMove} onMouseLeave={() => { x.set(0); y.set(0); }} style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', perspective: '1000px', cursor: 'none' }}>
+      <div style={{ position: 'absolute', width: '380px', height: '380px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(139,92,246,0.28) 0%,rgba(236,72,153,0.12) 50%,transparent 70%)' }} />
+      <motion.div style={{ rotateX, rotateY, x: moveX, y: moveY, position: 'relative', width: '300px', height: '300px' }}>
+        <motion.div style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'conic-gradient(from 0deg,#00E5FF 0%,#8B5CF6 25%,#EC4899 50%,#8B5CF6 75%,#00E5FF 100%)', padding: '3px' }} animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}>
+          <div style={{ width: '100%', height: '100%', borderRadius: '50%', background: '#050816' }} />
         </motion.div>
-        <div className="absolute inset-[3px] rounded-full overflow-hidden">
-          <Image src="/avatar.jpg" alt="Robel Yinager" fill className="object-cover object-top rounded-full" priority style={{ borderRadius: '50%' }} />
+        <div style={{ position: 'absolute', inset: '3px', borderRadius: '50%', overflow: 'hidden' }}>
+          <Image src="/avatar.jpg" alt="Robel Yinager" fill style={{ objectFit: 'cover', objectPosition: 'top', borderRadius: '50%' }} priority />
         </div>
-        <motion.div className="absolute inset-[-14px] rounded-full border border-neon-violet/20" animate={{ rotate: -360 }} transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}>
-          <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-neon-cyan shadow-[0_0_12px_2px_rgba(0,229,255,0.8)]" />
-        </motion.div>
-        <motion.div className="absolute inset-[-26px] rounded-full border border-neon-pink/10" animate={{ rotate: 360 }} transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}>
-          <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-neon-pink shadow-[0_0_8px_rgba(236,72,153,0.8)]" />
+        <motion.div style={{ position: 'absolute', inset: '-14px', borderRadius: '50%', border: '1px solid rgba(139,92,246,0.2)' }} animate={{ rotate: -360 }} transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}>
+          <div style={{ position: 'absolute', top: '-6px', left: '50%', transform: 'translateX(-50%)', width: '12px', height: '12px', borderRadius: '50%', background: '#00E5FF', boxShadow: '0 0 12px 2px rgba(0,229,255,0.8)' }} />
         </motion.div>
       </motion.div>
-      <motion.div className="absolute -top-6 right-4 flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-neon-cyan/40 backdrop-blur-md" animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}>
-        <span className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse" />
-        <span className="font-mono text-xs text-neon-cyan">Open to Work</span>
+      <motion.div style={{ position: 'absolute', top: '-24px', right: '8px', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 14px', borderRadius: '10px', background: 'rgba(11,17,32,0.95)', backdropFilter: 'blur(8px)', border: '1px solid rgba(0,229,255,0.2)' }} animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}>
+        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#00E5FF', animation: 'pulse2 2s infinite' }} />
+        <span style={{ fontFamily: 'Inter', fontSize: '12px', color: '#00E5FF', fontWeight: 500 }}>Open to Work</span>
       </motion.div>
-      <motion.div className="absolute top-1/3 -right-2 translate-x-full flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-yellow-400/30 backdrop-blur-md" animate={{ y: [0, 8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}>
-        <span className="text-yellow-400 text-sm">⚡</span>
-        <span className="font-mono text-xs text-yellow-400">Clean Code</span>
+      <motion.div style={{ position: 'absolute', top: '40%', right: '-8px', transform: 'translateX(100%)', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 14px', borderRadius: '10px', background: 'rgba(11,17,32,0.95)', backdropFilter: 'blur(8px)', border: '1px solid rgba(245,158,11,0.2)' }} animate={{ y: [0, 8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}>
+        <span style={{ fontSize: '14px' }}>⚡</span>
+        <span style={{ fontFamily: 'Inter', fontSize: '12px', color: '#F59E0B', fontWeight: 500 }}>Clean Code</span>
       </motion.div>
-      <motion.div className="absolute -bottom-6 right-8 flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-neon-violet/30 backdrop-blur-md" animate={{ y: [0, -6, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}>
-        <span className="text-base">🌐</span>
-        <span className="font-mono text-xs text-neon-violet">MERN Stack</span>
+      <motion.div style={{ position: 'absolute', bottom: '-24px', right: '24px', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 14px', borderRadius: '10px', background: 'rgba(11,17,32,0.95)', backdropFilter: 'blur(8px)', border: '1px solid rgba(139,92,246,0.2)' }} animate={{ y: [0, -6, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}>
+        <span style={{ fontSize: '14px' }}>🌐</span>
+        <span style={{ fontFamily: 'Inter', fontSize: '12px', color: '#8B5CF6', fontWeight: 500 }}>MERN Stack</span>
       </motion.div>
-      <motion.div className="absolute top-2 left-0 -translate-x-full flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120]/95 border border-neon-pink/30 backdrop-blur-md" animate={{ y: [0, 6, 0] }} transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}>
-        <span className="text-neon-pink text-sm font-medium">20+</span>
-        <span className="font-mono text-xs text-neon-pink">Projects</span>
+      <motion.div style={{ position: 'absolute', top: '8px', left: '-8px', transform: 'translateX(-100%)', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 14px', borderRadius: '10px', background: 'rgba(11,17,32,0.95)', backdropFilter: 'blur(8px)', border: '1px solid rgba(236,72,153,0.2)' }} animate={{ y: [0, 6, 0] }} transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}>
+        <span style={{ fontFamily: 'Space Grotesk', fontSize: '13px', color: '#EC4899', fontWeight: 600 }}>20+</span>
+        <span style={{ fontFamily: 'Inter', fontSize: '12px', color: '#EC4899', fontWeight: 500 }}>Projects</span>
       </motion.div>
     </div>
   );
@@ -109,91 +85,103 @@ export function Hero() {
   const { text: roleText } = useTypewriter(site.roles, { typingSpeed: 70, deletingSpeed: 35, pauseDuration: 2000 });
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20 pb-12 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(0,229,255,0.08) 0%, transparent 60%), radial-gradient(ellipse at 60% 80%, rgba(236,72,153,0.06) 0%, transparent 60%), linear-gradient(135deg, #050816 0%, #0B1120 50%, #050816 100%)' }} />
+    <section id="home" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '80px 0 48px', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 20% 50%,rgba(139,92,246,0.1) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(0,229,255,0.07) 0%,transparent 55%),radial-gradient(ellipse at 60% 80%,rgba(236,72,153,0.05) 0%,transparent 55%),#050816' }} />
       <ParticleBackground />
-      <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <div className="space-y-6 order-2 lg:order-1">
+
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 40px', width: '100%', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-              <div className="flex items-center gap-3 mb-5">
-                <div className="h-px w-10 bg-gradient-to-r from-neon-cyan to-transparent" />
-                <span className="font-mono text-neon-cyan text-xs tracking-[0.25em] uppercase">Welcome to my universe</span>
-                <div className="h-px w-10 bg-gradient-to-l from-neon-cyan to-transparent" />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+                <div style={{ height: '1px', width: '40px', background: 'linear-gradient(90deg,#00E5FF,transparent)' }} />
+                <span style={{ fontFamily: 'Inter', color: '#00E5FF', fontSize: '12px', letterSpacing: '0.22em', textTransform: 'uppercase' }}>Welcome to my universe</span>
+                <div style={{ height: '1px', width: '40px', background: 'linear-gradient(270deg,#00E5FF,transparent)' }} />
               </div>
-              <div className="space-y-1">
-                <p style={{ fontSize: 'clamp(1.1rem,2.2vw,1.5rem)', fontWeight: 400, color: '#94A3B8', fontFamily: 'var(--font-display)' }}>
-                  Hi, I&apos;m
-                </p>
-                <h1 style={{ fontSize: 'clamp(2.8rem,5.5vw,4.5rem)', fontWeight: 600, color: '#ffffff', fontFamily: 'var(--font-display)', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
-                  {site.name}
-                </h1>
-                <div className="flex items-center gap-2 pt-1" style={{ minHeight: '3rem' }}>
-                  <span style={{ color: '#00E5FF', fontSize: 'clamp(1.3rem,2.6vw,2rem)', fontWeight: 500, fontFamily: 'var(--font-display)' }}>&lt;</span>
-                  <span style={{ background: 'linear-gradient(90deg, #00E5FF, #8B5CF6, #EC4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', fontSize: 'clamp(1rem,2vw,1.6rem)', fontWeight: 500, fontFamily: 'var(--font-display)' }}>
-                    {roleText}
-                  </span>
-                  <span style={{ color: '#00E5FF', fontSize: 'clamp(1.3rem,2.6vw,2rem)', fontWeight: 400 }} className="animate-blink">|</span>
-                  <span style={{ color: '#00E5FF', fontSize: 'clamp(1.3rem,2.6vw,2rem)', fontWeight: 500, fontFamily: 'var(--font-display)' }}> /&gt;</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <p style={{ fontFamily: 'Space Grotesk', fontWeight: 400, fontSize: 'clamp(1.1rem,2vw,1.4rem)', color: '#94A3B8', margin: 0 }}>Hi, I&apos;m</p>
+                <h1 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: 'clamp(2.6rem,5vw,4.2rem)', color: '#ffffff', lineHeight: 1.05, letterSpacing: '-0.02em', margin: 0 }}>{site.name}</h1>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minHeight: '2.8rem', flexWrap: 'wrap' }}>
+                  <span style={{ fontFamily: 'Space Grotesk', color: '#00E5FF', fontSize: 'clamp(1.2rem,2.4vw,1.9rem)', fontWeight: 500 }}>&lt;</span>
+                  <span style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(1rem,2vw,1.6rem)', fontWeight: 500, background: 'linear-gradient(90deg,#00E5FF,#8B5CF6,#EC4899)', backgroundSize: '300% auto', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', animation: 'gradflow 4s ease infinite' }}>{roleText}</span>
+                  <span style={{ fontFamily: 'Space Grotesk', color: '#00E5FF', fontSize: 'clamp(1.2rem,2.4vw,1.9rem)', fontWeight: 400, animation: 'blink 1s step-end infinite' }}>|</span>
+                  <span style={{ fontFamily: 'Space Grotesk', color: '#00E5FF', fontSize: 'clamp(1.2rem,2.4vw,1.9rem)', fontWeight: 500 }}>/&gt;</span>
                 </div>
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="space-y-3 max-w-lg" style={{ color: '#94A3B8', fontSize: '15px', lineHeight: '1.7', fontWeight: 400 }}>
-              <p>Passionate full stack developer who thrives on building <span style={{ color: '#00E5FF', fontWeight: 500 }}>seamless digital experiences</span> from front to back.</p>
-              <p>Specializing in <span style={{ color: '#8B5CF6', fontWeight: 500 }}>MERN stack solutions</span> and solving complex architecture challenges with precision and creativity.</p>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '480px' }}>
+              <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '15px', color: '#94A3B8', lineHeight: 1.7, margin: 0 }}>Passionate full stack developer who thrives on building <span style={{ color: '#00E5FF', fontWeight: 500 }}>seamless digital experiences</span> from front to back. Deep expertise in responsive design and scalable backend architecture.</p>
+              <p style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '15px', color: '#94A3B8', lineHeight: 1.7, margin: 0 }}>Specializing in <span style={{ color: '#8B5CF6', fontWeight: 500 }}>MERN stack solutions</span>, custom interactive mechanics, and solving complex architecture challenges with precision and creativity.</p>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-2">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
               {techStack.map((tech, i) => (
-                <motion.span key={tech.name} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 + i * 0.05 }} className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 font-mono text-sm text-gray-300 hover:border-neon-cyan/40 hover:text-neon-cyan hover:bg-neon-cyan/5 transition-all duration-200 cursor-default">
+                <motion.span key={tech.name} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 + i * 0.04 }} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 14px', borderRadius: '50px', background: 'rgba(255,255,255,0.04)', fontFamily: 'Inter', fontSize: '13px', color: '#94A3B8', cursor: 'default', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { const s = e.currentTarget as HTMLSpanElement; s.style.background = 'rgba(0,229,255,0.06)'; s.style.color = '#00E5FF'; }}
+                  onMouseLeave={e => { const s = e.currentTarget as HTMLSpanElement; s.style.background = 'rgba(255,255,255,0.04)'; s.style.color = '#94A3B8'; }}>
                   <span>{tech.emoji}</span> {tech.name}
                 </motion.span>
               ))}
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}>
-              <div className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl bg-white/3 border border-white/8 font-mono text-sm flex-wrap">
-                <span style={{ color: '#475569' }}>const</span>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '12px 18px', borderRadius: '12px', background: 'rgba(255,255,255,0.03)', fontFamily: 'monospace', fontSize: '13px', flexWrap: 'wrap', lineHeight: 1.6 }}>
+                <span style={{ color: '#64748B' }}>const</span>
                 <span style={{ color: '#00E5FF' }}>developer</span>
-                <span style={{ color: '#475569' }}>=</span>
-                <span style={{ color: '#E2E8F0' }}>&#123;</span>
-                <span style={{ color: '#EC4899' }}>passion</span><span style={{ color: '#475569' }}>:</span><span style={{ color: '#4ADE80' }}>&quot;&#8734;&quot;</span>
-                <span style={{ color: '#E2E8F0' }}>,</span>
-                <span style={{ color: '#EC4899' }}>coffee</span><span style={{ color: '#475569' }}>:</span><span style={{ color: '#4ADE80' }}>&quot;daily&quot;</span>
-                <span style={{ color: '#E2E8F0' }}>,</span>
-                <span style={{ color: '#EC4899' }}>bugs</span><span style={{ color: '#475569' }}>:</span><span style={{ color: '#8B5CF6' }}>0</span>
-                <span style={{ color: '#E2E8F0' }}>&#125;</span>
+                <span style={{ color: '#64748B' }}>=</span>
+                <span style={{ color: '#CDD5E0' }}>&#123;</span>
+                <span style={{ color: '#EC4899' }}>passion</span><span style={{ color: '#64748B' }}>:</span><span style={{ color: '#4ADE80' }}>&quot;&#8734;&quot;</span>
+                <span style={{ color: '#CDD5E0' }}>,</span>
+                <span style={{ color: '#EC4899' }}>coffee</span><span style={{ color: '#64748B' }}>:</span><span style={{ color: '#4ADE80' }}>&quot;daily&quot;</span>
+                <span style={{ color: '#CDD5E0' }}>,</span>
+                <span style={{ color: '#EC4899' }}>bugs</span><span style={{ color: '#64748B' }}>:</span><span style={{ color: '#8B5CF6' }}>0</span>
+                <span style={{ color: '#CDD5E0' }}>&#125;</span>
               </div>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-              <div className="flex flex-wrap items-center rounded-xl overflow-hidden border border-white/8 bg-white/3 divide-x divide-white/8 max-w-fit">
-                <span className="flex items-center gap-2 px-4 py-2.5 font-mono text-xs text-green-400"><span className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0" />Available for hire</span>
-                <span className="flex items-center gap-2 px-4 py-2.5 font-mono text-xs text-yellow-400"><Zap size={12} />Responds within 24h</span>
-                <span className="flex items-center gap-2 px-4 py-2.5 font-mono text-xs text-neon-cyan"><Globe size={12} />Remote & On-site</span>
+              <div style={{ display: 'inline-flex', borderRadius: '12px', overflow: 'hidden', background: 'rgba(255,255,255,0.03)' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 16px', fontFamily: 'Inter', fontSize: '13px', color: '#4ADE80', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#4ADE80', animation: 'pulse2 2s infinite', flexShrink: 0 }} />
+                  Available for hire
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 16px', fontFamily: 'Inter', fontSize: '13px', color: '#F59E0B', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+                  <Zap size={13} /> Responds within 24h
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 16px', fontFamily: 'Inter', fontSize: '13px', color: '#00E5FF' }}>
+                  <Globe size={13} /> Remote & On-site
+                </span>
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="flex flex-wrap gap-4">
-              <a href="#contact" className="flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-neon-cyan to-neon-violet text-black font-mono text-sm font-medium hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] hover:scale-105 transition-all duration-300">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} style={{ display: 'flex', flexWrap: 'wrap', gap: '14px' }}>
+              <a href="#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 28px', borderRadius: '50px', background: 'linear-gradient(90deg,#00E5FF,#8B5CF6)', color: '#000000', fontFamily: 'Inter', fontWeight: 600, fontSize: '14px', textDecoration: 'none', transition: 'all 0.3s' }}
+                onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 28px rgba(0,229,255,0.45)'}
+                onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none'}>
                 <MessageSquare size={16} /> Contact Me
               </a>
-              <a href={site.resumeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-8 py-4 rounded-full border-2 border-neon-violet/50 text-white font-mono text-sm font-medium hover:border-neon-violet hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:scale-105 transition-all duration-300">
+              <a href={site.resumeUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 28px', borderRadius: '50px', border: '1.5px solid rgba(139,92,246,0.4)', color: '#ffffff', fontFamily: 'Inter', fontWeight: 500, fontSize: '14px', textDecoration: 'none', background: 'transparent', transition: 'all 0.3s' }}
+                onMouseEnter={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor = '#8B5CF6'; a.style.boxShadow = '0 0 20px rgba(139,92,246,0.3)'; }}
+                onMouseLeave={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor = 'rgba(139,92,246,0.4)'; a.style.boxShadow = 'none'; }}>
                 <FileText size={16} /> My Resume
               </a>
             </motion.div>
           </div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.7 }} className="order-1 lg:order-2">
+          <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.7 }} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <ParallaxPhoto />
           </motion.div>
         </div>
       </div>
 
-      <motion.a href="#about" className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-gray-600 hover:text-neon-cyan transition-colors duration-200 z-10" animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+      <motion.a href="#about" style={{ position: 'absolute', bottom: '32px', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', color: '#475569', textDecoration: 'none', zIndex: 10, transition: 'color 0.2s' }}
+        animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}
+        onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#00E5FF'}
+        onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#475569'}>
         <ChevronDown size={20} />
-        <span className="font-mono text-[9px] tracking-[0.3em] uppercase">Scroll</span>
+        <span style={{ fontFamily: 'Inter', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase' }}>Scroll</span>
       </motion.a>
     </section>
   );

@@ -13,15 +13,15 @@ const whyChooseMe = [
 ];
 
 const coreCapabilities = [
-  { num: 'I', title: 'Optimized Workflow', desc: 'My development experience is powered by modern tooling — VS Code extensions like Emmet, IntelliCode, and Prettier keep code clean, fast, and maintainable.', cat: 'DevOps' },
-  { num: 'II', title: 'Integrated Interfaces', desc: 'I create seamless connections between user interfaces and backend systems, enabling smooth, secure data exchange from dynamic form handling to custom API paths.', cat: 'Full Stack' },
-  { num: 'III', title: 'Client-Centric Delivery', desc: 'Every project is delivered with precision and purpose — on time, completely aligned with your targets, and built to leave a lasting modern impression.', cat: 'Delivery' },
-  { num: 'IV', title: 'Developer-Centric', desc: 'Built for uptime and impact: backend systems running on structured code with an emphasis on rock-solid reliability that builds user confidence.', cat: 'Backend' },
-  { num: 'V', title: 'Real-Time Updates', desc: 'I deploy full-stack applications with real-time updates and low latency metrics, ensuring users instantly experience data changes without reload delays.', cat: 'Full Stack' },
-  { num: 'VI', title: '24/7 Uptime Layouts', desc: 'I deliver applications optimized for continuous availability, high performance, and reliable server-side asset rendering under heavy networking traffic.', cat: 'DevOps' },
-  { num: 'VII', title: 'Fully Responsive', desc: 'Fluid layouts built cleanly to scale elegantly across smartphone screens, tablets, and wide high-definition monitors using pure modern CSS logic.', cat: 'Frontend' },
-  { num: 'VIII', title: 'Creative UI/UX Design', desc: 'I design intuitive interfaces with custom gradients, interactive layers, and light-weight vector graphics that elevate user engagement and brand presence.', cat: 'Frontend' },
-  { num: 'IX', title: 'Full-Stack Integration', desc: 'Connecting secure databases, robust server layers, and interactive front-ends into one unified application package designed for high-velocity user scaling.', cat: 'Full Stack' }
+  { num: 'I', title: 'Optimized Workflow', desc: 'My development experience is powered by modern tooling — VS Code extensions like Emmet, IntelliCode, and Prettier keep code clean, fast, and maintainable.', cat: 'DevOps', gradient: 'linear-gradient(135deg,#0ea5e9,#6366f1)' },
+  { num: 'II', title: 'Integrated Interfaces', desc: 'I create seamless connections between user interfaces and backend systems, enabling smooth, secure data exchange from dynamic form handling to custom API paths.', cat: 'Full Stack', gradient: 'linear-gradient(135deg,#8B5CF6,#EC4899)' },
+  { num: 'III', title: 'Client-Centric Delivery', desc: 'Every project is delivered with precision and purpose — on time, completely aligned with your targets, and built to leave a lasting modern impression.', cat: 'Delivery', gradient: 'linear-gradient(135deg,#10b981,#3b82f6)' },
+  { num: 'IV', title: 'Developer-Centric', desc: 'Built for uptime and impact: backend systems running on structured code with an emphasis on rock-solid reliability that builds user confidence.', cat: 'Backend', gradient: 'linear-gradient(135deg,#f59e0b,#ef4444)' },
+  { num: 'V', title: 'Real-Time Updates', desc: 'I deploy full-stack applications with real-time updates and low latency metrics, ensuring users instantly experience data changes without reload delays.', cat: 'Full Stack', gradient: 'linear-gradient(135deg,#00E5FF,#8B5CF6)' },
+  { num: 'VI', title: '24/7 Uptime Layouts', desc: 'I deliver applications optimized for continuous availability, high performance, and reliable server-side asset rendering under heavy networking traffic.', cat: 'DevOps', gradient: 'linear-gradient(135deg,#ec4899,#f97316)' },
+  { num: 'VII', title: 'Fully Responsive', desc: 'Fluid layouts built cleanly to scale elegantly across smartphone screens, tablets, and wide high-definition monitors using pure modern CSS logic.', cat: 'Frontend', gradient: 'linear-gradient(135deg,#6366f1,#8b5cf6)' },
+  { num: 'VIII', title: 'Creative UI/UX Design', desc: 'I design intuitive interfaces with custom gradients, interactive layers, and light-weight vector graphics that elevate user engagement and brand presence.', cat: 'Frontend', gradient: 'linear-gradient(135deg,#f43f5e,#ec4899)' },
+  { num: 'IX', title: 'Full-Stack Integration', desc: 'Connecting secure databases, robust server layers, and interactive front-ends into one unified application package designed for high-velocity user scaling.', cat: 'Full Stack', gradient: 'linear-gradient(135deg,#10b981,#00E5FF)' }
 ];
 
 const filterTabs = ['All', 'Frontend', 'Backend', 'Full Stack', 'DevOps', 'Delivery'];
@@ -45,7 +45,7 @@ export function Services() {
           <p style={{ color: '#64748B', fontSize: '16px', maxWidth: '560px', margin: '0 auto 28px', lineHeight: 1.6 }}>End-to-end digital solutions engineered with precision, creativity, and relentless attention to performance.</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '20px', padding: '14px 28px', borderRadius: '50px', background: 'rgba(255,255,255,0.03)', maxWidth: 'fit-content', margin: '0 auto' }}>
             {[['⚡','Fast Delivery','#F59E0B'],['🔒','Secure by Default','#8B5CF6'],['📐','Clean Architecture','#00E5FF'],['🤝','Full Ownership Transfer','#EC4899']].map(([icon,text,color])=>(
-              <span key={text as string} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'Inter', fontSize: '13px', color: color as string }}><span>{icon}</span>{text}</span>
+              <span key={text as string} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'Inter', fontSize: '13px', color: color as string }}><span>{icon}</span>{text as string}</span>
             ))}
           </div>
         </motion.div>
@@ -61,12 +61,9 @@ export function Services() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '16px', marginBottom: '80px' }}>
           {whyChooseMe.map((item, i) => (
             <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} whileHover={{ y: -6 }} style={{ position: 'relative', padding: '28px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', overflow: 'hidden', cursor: 'default', transition: 'all 0.3s' }}
-              onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.05)'; d.style.boxShadow = '0 0 30px ' + item.color + '15'; }}
-              onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.03)'; d.style.boxShadow = 'none'; }}>
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '0', background: 'linear-gradient(to top,' + item.color + '12,transparent)', transition: 'height 0.4s ease' }}
-                onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.height = '100%'}
-                onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.height = '0'} />
-              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: item.color + '15', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', marginBottom: '16px' }}>{item.icon}</div>
+              onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.boxShadow = '0 0 30px ' + item.color + '20'; d.style.background = 'rgba(255,255,255,0.05)'; }}
+              onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.boxShadow = 'none'; d.style.background = 'rgba(255,255,255,0.03)'; }}>
+              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: item.color + '18', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', marginBottom: '16px' }}>{item.icon}</div>
               <h4 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '17px', color: '#ffffff', marginBottom: '10px' }}>{item.title}</h4>
               <p style={{ fontFamily: 'Inter', fontSize: '14px', color: '#64748B', lineHeight: 1.65, marginBottom: '16px' }}>{item.desc}</p>
               <div style={{ height: '2px', width: '32px', borderRadius: '2px', background: item.color }} />
@@ -92,18 +89,29 @@ export function Services() {
         <AnimatePresence mode="wait">
           <motion.div key={activeFilter} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '16px' }}>
             {filtered.map((item, i) => (
-              <motion.div key={item.num} initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.05 }} whileHover={{ y: -6 }} style={{ position: 'relative', padding: '28px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', overflow: 'hidden', cursor: 'default', transition: 'all 0.3s' }}
-                onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.05)'; d.style.boxShadow = '0 0 25px rgba(0,229,255,0.1)'; }}
-                onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.03)'; d.style.boxShadow = 'none'; }}>
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '0', background: 'linear-gradient(to top,rgba(0,229,255,0.08),transparent)', transition: 'height 0.4s ease' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.height = '100%'}
-                  onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.height = '0'} />
-                <div style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: '40px', color: '#00E5FF', opacity: 0.25, marginBottom: '16px', lineHeight: 1 }}>{item.num}</div>
+              <motion.div key={item.num} initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.05 }} whileHover={{ y: -6, scale: 1.02 }} style={{ position: 'relative', padding: '28px', borderRadius: '16px', background: 'rgba(20,14,35,0.8)', overflow: 'hidden', cursor: 'default', transition: 'all 0.35s' }}
+                onMouseEnter={e => {
+                  const d = e.currentTarget as HTMLDivElement;
+                  d.style.background = item.gradient;
+                  d.style.boxShadow = '0 12px 40px rgba(0,0,0,0.4)';
+                  const btn = d.querySelector('button') as HTMLButtonElement | null;
+                  if (btn) { btn.style.background = 'rgba(255,255,255,0.15)'; btn.style.color = '#ffffff'; btn.style.borderColor = 'rgba(255,255,255,0.3)'; }
+                  const num = d.querySelector('.cap-num') as HTMLElement | null;
+                  if (num) num.style.opacity = '0.5';
+                }}
+                onMouseLeave={e => {
+                  const d = e.currentTarget as HTMLDivElement;
+                  d.style.background = 'rgba(20,14,35,0.8)';
+                  d.style.boxShadow = 'none';
+                  const btn = d.querySelector('button') as HTMLButtonElement | null;
+                  if (btn) { btn.style.background = 'transparent'; btn.style.color = '#00E5FF'; btn.style.borderColor = 'rgba(0,229,255,0.2)'; }
+                  const num = d.querySelector('.cap-num') as HTMLElement | null;
+                  if (num) num.style.opacity = '0.25';
+                }}>
+                <div className="cap-num" style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: '40px', color: '#ffffff', opacity: 0.25, marginBottom: '16px', lineHeight: 1, transition: 'opacity 0.3s' }}>{item.num}</div>
                 <h4 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '17px', color: '#ffffff', marginBottom: '10px' }}>{item.title}</h4>
-                <p style={{ fontFamily: 'Inter', fontSize: '14px', color: '#64748B', lineHeight: 1.65, marginBottom: '20px' }}>{item.desc}</p>
-                <button style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 16px', borderRadius: '50px', border: '1px solid rgba(0,229,255,0.2)', background: 'transparent', color: '#00E5FF', fontFamily: 'Inter', fontSize: '12px', cursor: 'pointer', transition: 'all 0.2s' }}
-                  onMouseEnter={e => { const b = e.currentTarget as HTMLButtonElement; b.style.background = 'rgba(0,229,255,0.08)'; b.style.borderColor = 'rgba(0,229,255,0.4)'; }}
-                  onMouseLeave={e => { const b = e.currentTarget as HTMLButtonElement; b.style.background = 'transparent'; b.style.borderColor = 'rgba(0,229,255,0.2)'; }}>
+                <p style={{ fontFamily: 'Inter', fontSize: '14px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, marginBottom: '20px' }}>{item.desc}</p>
+                <button style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 16px', borderRadius: '50px', border: '1px solid rgba(0,229,255,0.2)', background: 'transparent', color: '#00E5FF', fontFamily: 'Inter', fontSize: '12px', cursor: 'pointer', transition: 'all 0.25s' }}>
                   Read more →
                 </button>
               </motion.div>
