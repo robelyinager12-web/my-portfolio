@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const whyChooseMe = [
-  { icon: '⚡', title: 'Lightning Fast', desc: 'Performance-first development. Every project is optimized for Core Web Vitals, minimal bundle size, and sub-second load times from day one.', color: '#F59E0B' },
-  { icon: '🔒', title: 'Security First', desc: 'JWT auth, input sanitization, rate limiting, CORS hardening — security is baked into every layer of the stack, never bolted on at the end.', color: '#8B5CF6' },
-  { icon: '📐', title: 'Clean Architecture', desc: 'Modular, documented, readable code. Built for teams, not just demos. Your future developers will thank you for choosing maintainable structure.', color: '#EC4899' },
-  { icon: '🤝', title: 'Transparent Process', desc: 'Weekly updates, staging previews, and open communication throughout. You are never left wondering what is happening with your project.', color: '#F97316' },
-  { icon: '🚀', title: 'On-Time Delivery', desc: 'Deadlines are commitments. Milestone-based delivery keeps projects on track — if something changes, you are the first to know.', color: '#00E5FF' },
-  { icon: '♾️', title: 'Long-Term Support', desc: 'Post-launch support available for every project. Bug fixes, feature additions, and performance audits — I am here long after go-live.', color: '#3B82F6' }
+  { emoji: '⚡', icon: '\u26A1', title: 'Lightning Fast', desc: 'Performance-first development. Every project is optimized for Core Web Vitals, minimal bundle size, and sub-second load times from day one.', bg: 'rgba(15,25,35,0.9)', accent: '#F59E0B', lineColor: '#00E5FF' },
+  { emoji: '🔒', icon: '\uD83D\uDD12', title: 'Security First', desc: 'JWT auth, input sanitization, rate limiting, CORS hardening — security is baked into every layer of the stack, never bolted on at the end.', bg: 'rgba(20,12,35,0.9)', accent: '#8B5CF6', lineColor: '#8B5CF6' },
+  { emoji: '📐', icon: '\uD83D\uDCD0', title: 'Clean Architecture', desc: 'Modular, documented, readable code. Built for teams, not just demos. Your future developers will thank you for choosing maintainable structure.', bg: 'rgba(25,12,25,0.9)', accent: '#EC4899', lineColor: '#EC4899' },
+  { emoji: '🤝', icon: '\uD83E\uDD1D', title: 'Transparent Process', desc: 'Weekly updates, staging previews, and open communication throughout. You are never left wondering what is happening with your project.', bg: 'rgba(25,18,8,0.9)', accent: '#F97316', lineColor: '#F59E0B' },
+  { emoji: '🚀', icon: '\uD83D\uDE80', title: 'On-Time Delivery', desc: 'Deadlines are commitments. Milestone-based delivery keeps projects on track — if something changes, you are the first to know.', bg: 'rgba(8,25,30,0.9)', accent: '#00E5FF', lineColor: '#00E5FF' },
+  { emoji: '♾️', icon: '\u267E\uFE0F', title: 'Long-Term Support', desc: 'Post-launch support available for every project. Bug fixes, feature additions, and performance audits — I am here long after go-live.', bg: 'rgba(8,15,35,0.9)', accent: '#3B82F6', lineColor: '#3B82F6' }
 ];
 
 const coreCapabilities = [
@@ -34,7 +34,7 @@ export function Services() {
     <section id="services" style={{ position: 'relative', padding: '96px 0', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 0% 50%,rgba(0,229,255,0.04) 0%,transparent 60%),radial-gradient(ellipse at 100% 50%,rgba(236,72,153,0.04) 0%,transparent 60%)', pointerEvents: 'none' }} />
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 28px', position: 'relative', zIndex: 1 }}>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', marginBottom: '56px' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 18px', borderRadius: '50px', background: 'rgba(0,229,255,0.06)', fontFamily: 'Inter', fontSize: '11px', color: '#00E5FF', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '20px' }}>✦ WHAT I OFFER</span>
@@ -60,13 +60,13 @@ export function Services() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '16px', marginBottom: '80px' }}>
           {whyChooseMe.map((item, i) => (
-            <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} whileHover={{ y: -6 }} style={{ position: 'relative', padding: '28px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', overflow: 'hidden', cursor: 'default', transition: 'all 0.3s' }}
-              onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.boxShadow = '0 0 30px ' + item.color + '20'; d.style.background = 'rgba(255,255,255,0.05)'; }}
-              onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.boxShadow = 'none'; d.style.background = 'rgba(255,255,255,0.03)'; }}>
-              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: item.color + '18', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', marginBottom: '16px' }}>{item.icon}</div>
-              <h4 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '17px', color: '#ffffff', marginBottom: '10px' }}>{item.title}</h4>
-              <p style={{ fontFamily: 'Inter', fontSize: '14px', color: '#64748B', lineHeight: 1.65, marginBottom: '16px' }}>{item.desc}</p>
-              <div style={{ height: '2px', width: '32px', borderRadius: '2px', background: item.color }} />
+            <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} whileHover={{ y: -6 }} style={{ padding: '32px', borderRadius: '16px', background: item.bg, cursor: 'default', transition: 'all 0.3s', display: 'flex', flexDirection: 'column', gap: '16px' }}
+              onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.boxShadow = '0 8px 40px rgba(0,0,0,0.4)'; }}
+              onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.boxShadow = 'none'; }}>
+              <div style={{ fontSize: '36px', lineHeight: 1 }}>{item.emoji}</div>
+              <h4 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '18px', color: '#ffffff', margin: 0 }}>{item.title}</h4>
+              <p style={{ fontFamily: 'Inter', fontSize: '14px', color: '#94A3B8', lineHeight: 1.7, margin: 0, flex: 1 }}>{item.desc}</p>
+              <div style={{ height: '3px', width: '48px', borderRadius: '2px', background: item.lineColor }} />
             </motion.div>
           ))}
         </div>
@@ -95,9 +95,7 @@ export function Services() {
                   d.style.background = item.gradient;
                   d.style.boxShadow = '0 12px 40px rgba(0,0,0,0.4)';
                   const btn = d.querySelector('button') as HTMLButtonElement | null;
-                  if (btn) { btn.style.background = 'rgba(255,255,255,0.15)'; btn.style.color = '#ffffff'; btn.style.borderColor = 'rgba(255,255,255,0.3)'; }
-                  const num = d.querySelector('.cap-num') as HTMLElement | null;
-                  if (num) num.style.opacity = '0.5';
+                  if (btn) { btn.style.background = 'rgba(255,255,255,0.2)'; btn.style.color = '#ffffff'; btn.style.borderColor = 'rgba(255,255,255,0.4)'; }
                 }}
                 onMouseLeave={e => {
                   const d = e.currentTarget as HTMLDivElement;
@@ -105,13 +103,11 @@ export function Services() {
                   d.style.boxShadow = 'none';
                   const btn = d.querySelector('button') as HTMLButtonElement | null;
                   if (btn) { btn.style.background = 'transparent'; btn.style.color = '#00E5FF'; btn.style.borderColor = 'rgba(0,229,255,0.2)'; }
-                  const num = d.querySelector('.cap-num') as HTMLElement | null;
-                  if (num) num.style.opacity = '0.25';
                 }}>
-                <div className="cap-num" style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: '40px', color: '#ffffff', opacity: 0.25, marginBottom: '16px', lineHeight: 1, transition: 'opacity 0.3s' }}>{item.num}</div>
+                <div style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: '40px', color: '#ffffff', opacity: 0.25, marginBottom: '16px', lineHeight: 1, transition: 'opacity 0.3s' }}>{item.num}</div>
                 <h4 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '17px', color: '#ffffff', marginBottom: '10px' }}>{item.title}</h4>
                 <p style={{ fontFamily: 'Inter', fontSize: '14px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, marginBottom: '20px' }}>{item.desc}</p>
-                <button style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 16px', borderRadius: '50px', border: '1px solid rgba(0,229,255,0.2)', background: 'transparent', color: '#00E5FF', fontFamily: 'Inter', fontSize: '12px', cursor: 'pointer', transition: 'all 0.25s' }}>
+                <button style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 16px', borderRadius: '50px', border: '1px solid rgba(0,229,255,0.2)', background: 'transparent', color: '#00E5FF', fontFamily: 'Inter', fontSize: '12px', cursor: 'pointer', transition: 'all 0.25s' }}>
                   Read more →
                 </button>
               </motion.div>

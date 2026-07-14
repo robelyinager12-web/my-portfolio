@@ -3,15 +3,15 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home, User, Briefcase, FolderOpen, Mail } from 'lucide-react';
 import { useScrollState, useActiveSection } from '@/hooks/useNav';
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Contact', href: '#contact' }
+  { label: 'Home', href: '#home', icon: Home },
+  { label: 'About', href: '#about', icon: User },
+  { label: 'Services', href: '#services', icon: Briefcase },
+  { label: 'Portfolio', href: '#portfolio', icon: FolderOpen },
+  { label: 'Contact', href: '#contact', icon: Mail }
 ];
 
 export function Navbar() {
@@ -45,74 +45,50 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         style={{
-          position: 'fixed', top: '2px', left: 0, right: 0,
-          zIndex: 100,
-          padding: scrolled ? '12px 0' : '20px 0',
-          background: scrolled ? 'rgba(5,8,22,0.88)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(14px)' : 'none',
+          position: 'fixed', top: '2px', left: 0, right: 0, zIndex: 100,
+          padding: scrolled ? '10px 0' : '18px 0',
+          background: scrolled ? 'rgba(5,8,22,0.9)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
           transition: 'all 0.3s ease'
         }}
       >
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <a href="#home" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-            <div style={{ position: 'relative', width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', background: 'linear-gradient(135deg,#00E5FF,#8B5CF6,#EC4899)', padding: '2px' }}>
-              <div style={{ width: '100%', height: '100%', borderRadius: '50%', overflow: 'hidden' }}>
-                <Image src="/avatar.jpg" alt="Robel" width={40} height={40} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+
+          <a href="#home" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
+            <div style={{ position: 'relative', width: '48px', height: '48px', borderRadius: '50%', padding: '2px', background: 'linear-gradient(135deg,#00E5FF,#8B5CF6,#EC4899)', flexShrink: 0 }}>
+              <div style={{ width: '100%', height: '100%', borderRadius: '50%', overflow: 'hidden', background: '#050816' }}>
+                <Image src="/avatar.jpg" alt="Robel" width={48} height={48} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
               </div>
             </div>
-            <div>
-              <div style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '16px', color: '#ffffff', lineHeight: 1.2 }}>Robel</div>
-              <div style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '10px', color: '#00E5FF', letterSpacing: '0.12em', textTransform: 'uppercase', lineHeight: 1.2 }}>Full Stack Developer</div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '16px', color: '#ffffff', lineHeight: 1.2 }}>Robel</span>
+              <span style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '10px', color: '#00E5FF', letterSpacing: '0.15em', textTransform: 'uppercase', lineHeight: 1.2 }}>Full Stack Developer</span>
             </div>
           </a>
 
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '4px' }} className="hidden md:flex">
+          <nav className="hidden md:flex" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
             {navLinks.map(link => {
               const isActive = active === link.href.replace('#', '') || (link.href === '#home' && !active);
+              const Icon = link.icon;
               return (
-                <a key={link.href} href={link.href} style={{
-                  position: 'relative',
-                  padding: '8px 16px',
-                  fontFamily: 'Inter',
-                  fontWeight: 400,
-                  fontSize: '15px',
-                  color: isActive ? '#00E5FF' : '#94A3B8',
-                  textDecoration: 'none',
-                  borderRadius: '8px',
-                  transition: 'color 0.2s',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}>
-                  {link.href === '#home' && <span style={{ fontSize: '13px' }}>⌂</span>}
+                <a key={link.href} href={link.href} style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 16px', fontFamily: 'Inter', fontWeight: 400, fontSize: '15px', color: isActive ? '#00E5FF' : '#94A3B8', textDecoration: 'none', borderRadius: '8px', transition: 'color 0.2s' }}
+                  onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#CDD5E0'; }}
+                  onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLAnchorElement).style.color = '#94A3B8'; }}>
+                  {isActive && <Icon size={14} style={{ color: '#00E5FF' }} />}
                   {link.label}
-                  {isActive && <span style={{ position: 'absolute', bottom: '3px', left: '50%', transform: 'translateX(-50%)', width: '4px', height: '4px', borderRadius: '50%', background: '#00E5FF' }} />}
+                  {isActive && (
+                    <span style={{ position: 'absolute', bottom: '2px', left: '16px', right: '16px', height: '2px', borderRadius: '1px', background: 'linear-gradient(90deg,#00E5FF,#8B5CF6)', opacity: 0.8 }} />
+                  )}
                 </a>
               );
             })}
           </nav>
 
-          <div className="hidden md:flex" style={{ alignItems: 'center', gap: '12px' }}>
-            <a href="#contact" style={{
-              display: 'flex', alignItems: 'center', gap: '8px',
-              padding: '10px 22px',
-              borderRadius: '50px',
-              border: '2px solid rgba(139,92,246,0.5)',
-              fontFamily: 'Inter', fontWeight: 500, fontSize: '14px', color: '#ffffff',
-              textDecoration: 'none',
-              transition: 'all 0.25s',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = '#8B5CF6';
-              (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 20px rgba(139,92,246,0.35)';
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(139,92,246,0.5)';
-              (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none';
-            }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#4ADE80', animation: 'pulse2 2s infinite', flexShrink: 0 }} />
+          <div className="hidden md:flex" style={{ alignItems: 'center' }}>
+            <a href="#contact" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 22px', borderRadius: '50px', border: '2px solid #8B5CF6', fontFamily: 'Inter', fontWeight: 500, fontSize: '14px', color: '#ffffff', textDecoration: 'none', background: 'transparent', transition: 'all 0.25s', position: 'relative' }}
+              onMouseEnter={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.boxShadow = '0 0 20px rgba(139,92,246,0.4)'; a.style.borderColor = '#8B5CF6'; }}
+              onMouseLeave={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.boxShadow = 'none'; }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#4ADE80', flexShrink: 0 }} />
               Let&apos;s Talk →
             </a>
           </div>
@@ -127,13 +103,17 @@ export function Navbar() {
         {open && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 101, background: 'rgba(5,8,22,0.7)', backdropFilter: 'blur(4px)' }} />
-            <motion.nav initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }} style={{ position: 'fixed', right: 0, top: 0, bottom: 0, zIndex: 102, width: '280px', background: '#0B1120', padding: '80px 32px 32px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {navLinks.map((link, i) => (
-                <motion.a key={link.href} href={link.href} onClick={() => setOpen(false)} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }} style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '16px', color: active === link.href.replace('#','') ? '#00E5FF' : '#94A3B8', padding: '12px 0', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  {link.label}
-                </motion.a>
-              ))}
-              <a href="#contact" onClick={() => setOpen(false)} style={{ marginTop: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px', borderRadius: '50px', border: '2px solid rgba(139,92,246,0.5)', fontFamily: 'Inter', fontSize: '14px', color: '#ffffff', textDecoration: 'none' }}>
+            <motion.nav initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }} style={{ position: 'fixed', right: 0, top: 0, bottom: 0, zIndex: 102, width: '280px', background: '#0B1120', padding: '80px 32px 32px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              {navLinks.map((link, i) => {
+                const Icon = link.icon;
+                return (
+                  <motion.a key={link.href} href={link.href} onClick={() => setOpen(false)} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontFamily: 'Inter', fontWeight: 400, fontSize: '15px', color: active === link.href.replace('#', '') ? '#00E5FF' : '#94A3B8', padding: '12px 16px', borderRadius: '10px', textDecoration: 'none', background: active === link.href.replace('#', '') ? 'rgba(0,229,255,0.06)' : 'transparent', transition: 'all 0.2s' }}>
+                    <Icon size={16} />
+                    {link.label}
+                  </motion.a>
+                );
+              })}
+              <a href="#contact" onClick={() => setOpen(false)} style={{ marginTop: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px', borderRadius: '50px', border: '2px solid #8B5CF6', fontFamily: 'Inter', fontSize: '14px', color: '#ffffff', textDecoration: 'none' }}>
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#4ADE80' }} />
                 Let&apos;s Talk →
               </a>
