@@ -2,149 +2,117 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
 
 const skillsData = [
-  { name: 'React.js', percent: 95, icon: '⚛️', color: 'from-cyan-400 to-blue-500' },
-  { name: 'Next.js', percent: 90, icon: '▲', color: 'from-white to-gray-400' },
-  { name: 'TypeScript', percent: 88, icon: '🔷', color: 'from-blue-400 to-blue-600' },
-  { name: 'Node.js', percent: 93, icon: '🟢', color: 'from-green-400 to-green-600' },
-  { name: 'MongoDB', percent: 91, icon: '🍃', color: 'from-green-500 to-emerald-600' },
-  { name: 'PostgreSQL', percent: 85, icon: '🐘', color: 'from-blue-500 to-indigo-600' },
-  { name: 'MySQL', percent: 87, icon: '🗄️', color: 'from-orange-400 to-orange-600' },
-  { name: 'Express.js', percent: 92, icon: '⚙️', color: 'from-gray-400 to-gray-600' },
-  { name: 'Three.js', percent: 80, icon: '🎮', color: 'from-purple-400 to-purple-600' }
+  { name: 'React.js', percent: 95, color: '#61DAFB', bg: 'linear-gradient(90deg,#61DAFB,#0ea5e9)' },
+  { name: 'Next.js', percent: 90, color: '#ffffff', bg: 'linear-gradient(90deg,#ffffff,#94A3B8)' },
+  { name: 'TypeScript', percent: 88, color: '#3178C6', bg: 'linear-gradient(90deg,#3178C6,#60a5fa)' },
+  { name: 'Node.js', percent: 93, color: '#68A063', bg: 'linear-gradient(90deg,#68A063,#4ADE80)' },
+  { name: 'MongoDB', percent: 91, color: '#4DB33D', bg: 'linear-gradient(90deg,#4DB33D,#22c55e)' },
+  { name: 'PostgreSQL', percent: 85, color: '#336791', bg: 'linear-gradient(90deg,#336791,#6366f1)' },
+  { name: 'MySQL', percent: 87, color: '#F29111', bg: 'linear-gradient(90deg,#F29111,#f97316)' },
+  { name: 'Express.js', percent: 92, color: '#94A3B8', bg: 'linear-gradient(90deg,#94A3B8,#64748B)' },
+  { name: 'Three.js', percent: 80, color: '#8B5CF6', bg: 'linear-gradient(90deg,#8B5CF6,#EC4899)' }
 ];
 
-const experienceData = [
-  { role: 'Software Engineer', company: 'Company Name', period: '2025 — Present', type: 'Full-time', highlights: ['Lead end-to-end feature delivery across Next.js and Node.js stack', 'Designed Three.js-powered interactive product visualizer', 'Owned PostgreSQL and MongoDB schemas for core services'] },
-  { role: 'Full-Stack Developer', company: 'Company Name', period: '2024 — 2025', type: 'Full-time', highlights: ['Built and maintained React + Express MERN features', 'Introduced Jest testing raising coverage significantly', 'Implemented real-time features using Socket.io'] },
-  { role: 'Freelance Developer', company: 'Self-employed', period: '2023 — Present', type: 'Freelance', highlights: ['Delivered full-stack applications for independent clients', 'Handled complete project lifecycle end to end', 'Built e-commerce stores and management dashboards'] }
+const careerTimeline = [
+  { year: '2025', gradient: 'linear-gradient(135deg,#00E5FF,#0ea5e9)', role: 'Independent Full-Stack Developer', company: 'Self-Directed / Real-World Projects', location: 'Injibara, Ethiopia', period: 'Feb 2024 — Present', type: 'Freelance' },
+  { year: '2024', gradient: 'linear-gradient(135deg,#8B5CF6,#6366f1)', role: 'Full-Stack Developer (Learning)', company: 'University of Injibara', location: 'Injibara, Ethiopia', period: '2022 — Present', type: 'Academic' },
+  { year: '2022', gradient: 'linear-gradient(135deg,#EC4899,#f43f5e)', role: 'Frontend Developer', company: 'Self-taught Projects', location: 'Injibara, Ethiopia', period: '2022', type: 'Self-taught' }
 ];
 
-const servicesData = [
-  { title: 'Full Stack Development', desc: 'End-to-end web application development using modern frameworks and scalable architectures.', icon: '💻' },
-  { title: 'Frontend Engineering', desc: 'Responsive, interactive and visually engaging user interfaces built for performance.', icon: '🎨' },
-  { title: 'Backend Development', desc: 'Secure APIs, authentication systems and scalable server-side applications.', icon: '🔧' },
-  { title: 'Database Design', desc: 'Efficient database architecture and query optimization for high-performance applications.', icon: '🗄️' },
-  { title: 'Cloud Deployment', desc: 'Deploying applications using modern cloud and DevOps practices on AWS and Vercel.', icon: '☁️' },
-  { title: '3D Web Experiences', desc: 'Interactive Three.js scenes, WebGL visualizations and immersive digital experiences.', icon: '🌐' }
+const servicesTabData = [
+  { title: 'Full Stack Development', desc: 'End-to-end web application development using React, Next.js, Node.js and scalable database architectures.' },
+  { title: 'Frontend Engineering', desc: 'Responsive, interactive UIs built for performance and accessibility. Specializing in React, Next.js and Three.js.' },
+  { title: 'Backend Development', desc: 'Secure, scalable APIs built with Node.js and Express. Authentication systems and third-party integrations.' },
+  { title: 'Database Design', desc: 'Efficient schema design and query optimization across MongoDB, PostgreSQL and MySQL.' },
+  { title: 'Cloud Deployment', desc: 'Production deployments on Vercel, AWS and Google Cloud with CI/CD and Docker containerization.' },
+  { title: '3D Web Experiences', desc: 'Interactive WebGL scenes using Three.js and React Three Fiber for immersive digital experiences.' }
 ];
 
-const tabs = ['⚡ SKILLS', '📋 EXPERIENCE', '🔧 SERVICES'];
-
-function SkillBar({ skill, index }: { skill: typeof skillsData[0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05 }}
-      className="p-5 rounded-2xl bg-white/3  hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300 group"
-    >
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <span className="text-xl">{skill.icon}</span>
-          <span className="font-mono font-semibold text-white text-sm">{skill.name}</span>
-        </div>
-        <span className="font-mono font-bold text-neon-cyan text-sm">{skill.percent}%</span>
-      </div>
-      <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-        <motion.div
-          className={`h-full rounded-full bg-gradient-to-r ${skill.color}`}
-          initial={{ width: 0 }}
-          whileInView={{ width: skill.percent + '%' }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: index * 0.05, ease: 'easeOut' }}
-        />
-      </div>
-    </motion.div>
-  );
-}
+const tabs = [
+  { key: 'skills', label: '⚡ SKILLS' },
+  { key: 'experience', label: '📋 EXPERIENCE' },
+  { key: 'services', label: '🔧 SERVICES' }
+];
 
 export function Skills() {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState('skills');
 
   return (
-    <section id="skills" className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-neon-cyan/5 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-neon-violet/5 rounded-full blur-[120px]" />
-      </div>
+    <section id="skills" style={{ position: 'relative', padding: '96px 0', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 50%,rgba(139,92,246,0.05) 0%,transparent 70%)', pointerEvents: 'none' }} />
 
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-violet/30 bg-neon-violet/5 font-mono text-xs text-neon-violet tracking-widest uppercase mb-6">
-            ✦ MY PROFILE
-          </span>
-          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,4.5rem)] leading-tight">
-            <span className="text-white">My Professional </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-neon-violet to-neon-pink">Profile</span>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 28px', position: 'relative', zIndex: 1 }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 18px', borderRadius: '50px', background: 'rgba(139,92,246,0.06)', fontFamily: 'Inter', fontSize: '11px', color: '#8B5CF6', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '20px' }}>✦ MY PROFILE</span>
+          <h2 style={{ fontFamily: 'Space Grotesk', fontSize: 'clamp(2.2rem,5vw,3.8rem)', fontWeight: 600, lineHeight: 1.15 }}>
+            <span style={{ color: '#ffffff' }}>My Professional </span>
+            <span style={{ background: 'linear-gradient(90deg,#00E5FF,#8B5CF6,#EC4899)', backgroundSize: '300% auto', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', animation: 'gradflow 4s ease infinite' }}>Profile</span>
           </h2>
         </motion.div>
 
-        <div className="flex items-center justify-center gap-2 mb-10">
-          {tabs.map((tab, i) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(i)}
-              className={cn(
-                'px-6 py-2.5 rounded-full font-mono text-sm font-semibold transition-all duration-300',
-                activeTab === i
-                  ? 'bg-gradient-to-r from-neon-cyan to-neon-violet text-black shadow-[0_0_20px_rgba(0,255,255,0.3)]'
-                  : 'bg-white/5  text-gray-400 hover:text-white hover:border-white/20'
-              )}
-            >
-              {tab}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '40px', flexWrap: 'wrap' }}>
+          {tabs.map(tab => (
+            <button key={tab.key} onClick={() => setActiveTab(tab.key)} style={{ padding: '10px 24px', borderRadius: '50px', border: activeTab === tab.key ? 'none' : '1px solid rgba(255,255,255,0.1)', fontFamily: 'Inter', fontSize: '13px', fontWeight: activeTab === tab.key ? 600 : 400, cursor: 'pointer', transition: 'all 0.25s', background: activeTab === tab.key ? 'linear-gradient(90deg,#00E5FF,#8B5CF6)' : 'rgba(255,255,255,0.04)', color: activeTab === tab.key ? '#000000' : '#94A3B8', letterSpacing: '0.05em' }}>
+              {tab.label}
             </button>
           ))}
         </div>
 
         <AnimatePresence mode="wait">
-          {activeTab === 0 && (
-            <motion.div key="skills" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {activeTab === 'skills' && (
+            <motion.div key="skills" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '12px' }}>
               {skillsData.map((skill, i) => (
-                <SkillBar key={skill.name} skill={skill} index={i} />
-              ))}
-            </motion.div>
-          )}
-
-          {activeTab === 1 && (
-            <motion.div key="experience" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }} className="space-y-6 max-w-3xl mx-auto">
-              {experienceData.map((item, i) => (
-                <motion.div key={item.role} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="p-6 rounded-2xl bg-white/3  hover:border-neon-cyan/30 transition-all duration-300">
-                  <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
-                    <div>
-                      <h3 className="font-display font-bold text-lg text-white">{item.role}</h3>
-                      <p className="font-mono text-sm text-neon-cyan">{item.company}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-mono text-xs text-gray-500">{item.period}</p>
-                      <span className={cn('inline-block mt-1 px-2 py-0.5 rounded-full font-mono text-[10px]', item.type === 'Freelance' ? 'bg-neon-pink/10 text-neon-pink border border-neon-pink/20' : 'bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20')}>
-                        {item.type}
-                      </span>
-                    </div>
+                <motion.div key={skill.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} style={{ padding: '20px 24px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', transition: 'all 0.25s' }}
+                  onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.06)'; d.style.transform = 'translateY(-3px)'; }}
+                  onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.03)'; d.style.transform = 'translateY(0)'; }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+                    <span style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '15px', color: '#ffffff' }}>{skill.name}</span>
+                    <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '14px', color: skill.color }}>{skill.percent}%</span>
                   </div>
-                  <ul className="space-y-2">
-                    {item.highlights.map((h) => (
-                      <li key={h} className="flex items-start gap-2 text-gray-400 text-sm">
-                        <span className="text-neon-violet mt-0.5 flex-shrink-0">→</span>
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
+                  <div style={{ height: '6px', background: 'rgba(255,255,255,0.06)', borderRadius: '3px', overflow: 'hidden' }}>
+                    <motion.div initial={{ width: 0 }} whileInView={{ width: skill.percent + '%' }} viewport={{ once: true }} transition={{ duration: 1.2, delay: i * 0.04, ease: 'easeOut' }} style={{ height: '100%', background: skill.bg, borderRadius: '3px' }} />
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
           )}
 
-          {activeTab === 2 && (
-            <motion.div key="services" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {servicesData.map((service, i) => (
-                <motion.div key={service.title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} className="p-6 rounded-2xl bg-white/3  hover:border-neon-violet/30 hover:bg-white/5 transition-all duration-300 group" whileHover={{ y: -4 }}>
-                  <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="font-display font-bold text-white text-lg mb-2 group-hover:text-neon-cyan transition-colors duration-300">{service.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{service.desc}</p>
+          {activeTab === 'experience' && (
+            <motion.div key="experience" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
+              <div style={{ padding: '32px', borderRadius: '20px', background: 'rgba(255,255,255,0.03)', maxWidth: '760px', margin: '0 auto' }}>
+                <h3 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '24px', color: '#ffffff', marginBottom: '6px' }}>Career Timeline</h3>
+                <p style={{ fontFamily: 'Inter', fontSize: '14px', color: '#64748B', marginBottom: '32px' }}>My journey through the world of software development</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+                  {careerTimeline.map((item, i) => (
+                    <motion.div key={item.year} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '20px 0', borderBottom: i < careerTimeline.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
+                      <div style={{ width: '64px', height: '64px', borderRadius: '14px', background: item.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <span style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: '14px', color: '#ffffff' }}>{item.year}</span>
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <h4 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '17px', color: '#ffffff', marginBottom: '2px' }}>{item.role}</h4>
+                        <p style={{ fontFamily: 'Inter', fontSize: '13px', color: '#64748B', marginBottom: '0' }}>{item.company}</p>
+                      </div>
+                      <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                        <p style={{ fontFamily: 'Inter', fontSize: '12px', color: '#475569', marginBottom: '4px' }}>{item.period}</p>
+                        <span style={{ fontFamily: 'Inter', fontSize: '11px', fontWeight: 500, padding: '3px 10px', borderRadius: '50px', background: 'rgba(139,92,246,0.15)', color: '#8B5CF6' }}>{item.type}</span>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {activeTab === 'services' && (
+            <motion.div key="services" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '14px' }}>
+              {servicesTabData.map((s, i) => (
+                <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} whileHover={{ y: -5 }} style={{ padding: '24px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', cursor: 'default', transition: 'all 0.25s' }}
+                  onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.06)'; d.style.boxShadow = '0 8px 30px rgba(0,0,0,0.3)'; }}
+                  onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.background = 'rgba(255,255,255,0.03)'; d.style.boxShadow = 'none'; }}>
+                  <h4 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '16px', color: '#ffffff', marginBottom: '10px' }}>{s.title}</h4>
+                  <p style={{ fontFamily: 'Inter', fontSize: '14px', color: '#64748B', lineHeight: 1.65, margin: 0 }}>{s.desc}</p>
                 </motion.div>
               ))}
             </motion.div>
