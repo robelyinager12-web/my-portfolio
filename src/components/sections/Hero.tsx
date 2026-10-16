@@ -55,7 +55,7 @@ function ParallaxPhoto() {
           <div style={{ width: '100%', height: '100%', borderRadius: '50%', background: '#050816' }} />
         </motion.div>
         <div style={{ position: 'absolute', inset: '3px', borderRadius: '50%', overflow: 'hidden' }}>
-          <Image src="/avatar.jpg" alt="Robel Yinager" fill style={{ objectFit: 'cover', objectPosition: 'top', borderRadius: '50%' }} priority />
+          <Image src="/avatar.jpg" alt="Robel Yinager" fill sizes="(max-width: 768px) 80vw, 480px" style={{ objectFit: 'cover', objectPosition: 'top', borderRadius: '50%' }} priority />
         </div>
         <motion.div style={{ position: 'absolute', inset: '-14px', borderRadius: '50%', border: '1px solid rgba(139,92,246,0.2)' }} animate={{ rotate: -360 }} transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}>
           <div style={{ position: 'absolute', top: '-6px', left: '50%', transform: 'translateX(-50%)', width: '12px', height: '12px', borderRadius: '50%', background: '#00E5FF', boxShadow: '0 0 12px 2px rgba(0,229,255,0.8)' }} />

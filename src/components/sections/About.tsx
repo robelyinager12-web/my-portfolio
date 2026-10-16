@@ -33,8 +33,7 @@ function ParallaxPhoto() {
       <motion.div style={{ rotateX, rotateY, x: moveX, y: moveY, position: 'relative', width: '300px' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle,rgba(139,92,246,0.35) 0%,rgba(236,72,153,0.15) 50%,transparent 70%)', transform: 'scale(1.2)', filter: 'blur(20px)', borderRadius: '16px' }} />
         <div style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', aspectRatio: '3/4', boxShadow: '0 20px 60px rgba(0,0,0,0.5)', background: 'linear-gradient(135deg,rgba(0,229,255,0.05),rgba(139,92,246,0.1))' }}>
-          <Image src="/avatar.jpg" alt="Robel Yinager" fill style={{ objectFit: 'cover', objectPosition: 'top' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(5,8,22,0.75) 0%,transparent 60%)' }} />
+          <Image src="/avatar.jpg" alt="Robel Yinager" fill sizes="(max-width: 768px) 100vw, 480px" style={{ objectFit: 'cover', objectPosition: 'top' }} />
         </div>
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', background: 'rgba(5,8,22,0.92)', backdropFilter: 'blur(12px)', borderRadius: '12px', padding: '10px 16px', border: '1px solid rgba(0,229,255,0.15)' }}>
