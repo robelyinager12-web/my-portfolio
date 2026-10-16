@@ -73,7 +73,7 @@ export function Projects() {
               </div>
 
               <div style={{ padding: '20px' }}>
-                <div style={{ fontFamily: 'Inter', fontSize: '10px', color: hovered === i ? 'rgba(255,255,255,0.5)' : '#475569', letterSpacing: '0.1em', marginBottom: '4px', transition: 'color 0.3s' }}>// {project.category}</div>
+                <div style={{ fontFamily: 'Inter', fontSize: '10px', color: hovered === i ? 'rgba(255,255,255,0.5)' : '#475569', letterSpacing: '0.1em', marginBottom: '4px', transition: 'color 0.3s' }}>{'// '}{project.category}</div>
                 <h3 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '17px', color: '#ffffff', marginBottom: '10px', lineHeight: 1.3 }}>{project.title}</h3>
                 <div style={{ display: 'flex', gap: '16px', marginBottom: '10px' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontFamily: 'Inter', fontSize: '12px', color: hovered === i ? 'rgba(255,255,255,0.6)' : '#475569' }}><Star size={11} style={{ color: '#F59E0B' }} />{project.stars}</span>
