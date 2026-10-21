@@ -28,10 +28,16 @@ export function Contact() {
     };
     try {
       const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-      if (!res.ok) { const j = await res.json().catch(() => ({})); throw new Error(j.error || 'Failed'); }
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}));
+        throw new Error(j.error || 'Failed');
+      }
       setStatus('success');
       form.reset();
-    } catch (err) { setErrorMsg(err instanceof Error ? err.message : 'Failed'); setStatus('error'); }
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : 'Failed. Email robelyinager12@gmail.com directly.');
+      setStatus('error');
+    }
   }
 
   const inp: React.CSSProperties = {
@@ -67,7 +73,7 @@ export function Contact() {
                 <input id="email" name="email" type="email" required placeholder="Email address" style={{ ...inp }} onFocus={e => (e.target as HTMLInputElement).style.borderBottomColor = '#00E5FF'} onBlur={e => (e.target as HTMLInputElement).style.borderBottomColor = 'rgba(255,255,255,0.1)'} />
               </div>
               <div style={{ marginBottom: '36px' }}>
-                <textarea id="message" name="message" required rows={5} minLength={10} placeholder="Your message (at least 10 characters)" style={{ ...inp, resize: 'none', display: 'block' }} onFocus={e => (e.target as HTMLTextAreaElement).style.borderBottomColor = '#00E5FF'} onBlur={e => (e.target as HTMLTextAreaElement).style.borderBottomColor = 'rgba(255,255,255,0.1)'} />
+                <textarea id="message" name="message" required rows={5} placeholder="Your message" style={{ ...inp, resize: 'none', display: 'block' }} onFocus={e => (e.target as HTMLTextAreaElement).style.borderBottomColor = '#00E5FF'} onBlur={e => (e.target as HTMLTextAreaElement).style.borderBottomColor = 'rgba(255,255,255,0.1)'} />
               </div>
               <div style={{ marginBottom: status !== 'idle' ? '20px' : '0' }}>
                 <button type="submit" disabled={status === 'sending'} style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '12px 32px', borderRadius: '50px', border: '1px solid rgba(0,229,255,0.3)', background: 'transparent', color: '#00E5FF', fontFamily: 'Inter', fontSize: '14px', fontWeight: 500, cursor: 'pointer', transition: 'all 0.2s' }}
@@ -77,7 +83,7 @@ export function Contact() {
                 </button>
               </div>
               {status === 'success' && <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', borderRadius: '10px', background: 'rgba(74,222,128,0.08)', fontFamily: 'Inter', fontSize: '13px', color: '#4ADE80' }}><CheckCircle size={14} />Message sent! I will reply within 24 hours.</motion.div>}
-              {status === 'error' && <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', borderRadius: '10px', background: 'rgba(248,113,113,0.08)', fontFamily: 'Inter', fontSize: '13px', color: '#F87171' }}><AlertCircle size={14} />{errorMsg && errorMsg !== 'Failed' ? errorMsg + ' ' : 'Failed. '}You can also email robelyinager12@gmail.com directly.</motion.div>}
+              {status === 'error' && <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', borderRadius: '10px', background: 'rgba(248,113,113,0.08)', fontFamily: 'Inter', fontSize: '13px', color: '#F87171' }}><AlertCircle size={14} />{errorMsg || 'Failed. Email robelyinager12@gmail.com directly.'}</motion.div>}
             </form>
           </motion.div>
 
